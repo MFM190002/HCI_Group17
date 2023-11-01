@@ -1,4 +1,4 @@
-.index {
+.home {
     background-color: #a9d2f7;
     display: flex;
     flex-direction: row;
@@ -6,7 +6,7 @@
     width: 100%;
   }
   
-  .index .div {
+  .home .div {
     background-color: #a9d2f7;
     height: 1037px;
     overflow: hidden;
@@ -14,7 +14,7 @@
     width: 1452px;
   }
   
-  .index .text-wrapper {
+  .home .text-wrapper {
     color: #000000;
     font-family: "Inter", Helvetica;
     font-size: 64px;
@@ -29,7 +29,7 @@
     width: 318px;
   }
   
-  .index .overlap {
+  .home .overlap {
     height: 49px;
     left: 1160px;
     position: absolute;
@@ -37,7 +37,7 @@
     width: 205px;
   }
   
-  .index .rectangle {
+  .home .rectangle {
     height: 49px;
     left: 0;
     position: absolute;
@@ -45,7 +45,7 @@
     width: 205px;
   }
   
-  .index .text-wrapper-2 {
+  .home .text-wrapper-2 {
     color: #000000;
     font-family: "Inter", Helvetica;
     font-size: 24px;
@@ -58,7 +58,7 @@
     top: 5px;
   }
   
-  .index .text-wrapper-3 {
+  .home .text-wrapper-3 {
     color: #ffffff;
     font-family: "Inter", Helvetica;
     font-size: 36px;
@@ -72,7 +72,7 @@
     width: 692px;
   }
   
-  .index .text-wrapper-4 {
+  .home .text-wrapper-4 {
     color: #ffffff;
     font-family: "Inter", Helvetica;
     font-size: 36px;
@@ -85,7 +85,7 @@
     top: 458px;
   }
   
-  .index .overlap-group {
+  .home .overlap-group {
     height: 101px;
     left: 113px;
     position: absolute;
@@ -93,7 +93,7 @@
     width: 1389px;
   }
   
-  .index .text-wrapper-5 {
+  .home .text-wrapper-5 {
     color: #ffffff;
     font-family: "Inter", Helvetica;
     font-size: 48px;
@@ -107,7 +107,7 @@
     width: 383px;
   }
   
-  .index .text-wrapper-6 {
+  .home .text-wrapper-6 {
     color: #ffffff;
     font-family: "Inter", Helvetica;
     font-size: 48px;
@@ -121,7 +121,7 @@
     width: 383px;
   }
   
-  .index .rectangle-2 {
+  .home .rectangle-2 {
     background-color: #d9d9d9;
     border-radius: 15px;
     height: 53px;
@@ -131,7 +131,7 @@
     width: 751px;
   }
   
-  .index .overlap-2 {
+  .home .overlap-2 {
     height: 45px;
     left: 113px;
     position: absolute;
@@ -139,7 +139,7 @@
     width: 503px;
   }
   
-  .index .group {
+  .home .group {
     height: 44px;
     left: 0;
     position: absolute;
@@ -147,13 +147,13 @@
     width: 503px;
   }
   
-  .index .overlap-group-2 {
+  .home .overlap-group-2 {
     height: 44px;
     position: relative;
     width: 501px;
   }
   
-  .index .text-wrapper-7 {
+  .home .text-wrapper-7 {
     color: #ffffff;
     font-family: "Inter", Helvetica;
     font-size: 36px;
@@ -166,7 +166,7 @@
     width: 501px;
   }
   
-  .index .rectangle-3 {
+  .home .rectangle-3 {
     background-color: #d9d9d9;
     border-radius: 15px;
     height: 44px;
@@ -176,7 +176,7 @@
     width: 224px;
   }
   
-  .index .friend-wrapper {
+  .home .friend-wrapper {
     height: 44px;
     left: 113px;
     position: absolute;
@@ -184,12 +184,12 @@
     width: 501px;
   }
   
-  .index .friend {
+  .home .friend {
     height: 44px;
     width: 503px;
   }
   
-  .index .overlap-wrapper {
+  .home .overlap-wrapper {
     height: 97px;
     left: 164px;
     position: absolute;
@@ -197,14 +197,14 @@
     width: 312px;
   }
   
-  .index .overlap-3 {
+  .home .overlap-3 {
     height: 105px;
     left: -4px;
     position: relative;
     width: 318px;
   }
   
-  .index .img {
+  .home .img {
     height: 105px;
     left: 0;
     position: absolute;
@@ -212,7 +212,7 @@
     width: 318px;
   }
   
-  .index .text-wrapper-8 {
+  .home .text-wrapper-8 {
     color: #ffffff;
     font-family: "Inter", Helvetica;
     font-size: 32px;
@@ -227,7 +227,7 @@
     width: 229px;
   }
   
-  .index .overlap-group-wrapper {
+  .home .overlap-group-wrapper {
     height: 97px;
     left: 917px;
     position: absolute;
@@ -235,7 +235,7 @@
     width: 312px;
   }
   
-  .index .group-2 {
+  .home .group-2 {
     height: 48px;
     left: 872px;
     position: absolute;
@@ -243,7 +243,7 @@
     width: 441px;
   }
   
-  .index .rectangle-4 {
+  .home .rectangle-4 {
     background-color: #d9d9d9;
     border-radius: 45px;
     height: 44px;
@@ -253,7 +253,7 @@
     width: 44px;
   }
   
-  .index .text-wrapper-9 {
+  .home .text-wrapper-9 {
     color: #ffffff;
     font-family: "Inter", Helvetica;
     font-size: 32px;
@@ -268,7 +268,7 @@
     width: 316px;
   }
   
-  .index .group-3 {
+  .home .group-3 {
     height: 48px;
     left: 872px;
     position: absolute;
@@ -276,7 +276,7 @@
     width: 492px;
   }
   
-  .index .text-wrapper-10 {
+  .home .text-wrapper-10 {
     color: #ffffff;
     font-family: "Inter", Helvetica;
     font-size: 32px;
@@ -291,7 +291,7 @@
     width: 385px;
   }
   
-  .index .group-4 {
+  .home .group-4 {
     height: 48px;
     left: 872px;
     position: absolute;
@@ -299,7 +299,7 @@
     width: 441px;
   }
   
-  .index .text-wrapper-11 {
+  .home .text-wrapper-11 {
     color: #ffffff;
     font-family: "Inter", Helvetica;
     font-size: 32px;

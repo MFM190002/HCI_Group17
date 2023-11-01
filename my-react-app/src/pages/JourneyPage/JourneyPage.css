@@ -1,4 +1,4 @@
-.index {
+.journey {
     background-color: #a9d2f7;
     display: flex;
     flex-direction: row;
@@ -6,14 +6,14 @@
     width: 100%;
   }
   
-  .index .div {
+  .journey .div {
     background-color: #a9d2f7;
     height: 1037px;
     position: relative;
     width: 1452px;
   }
   
-  .index .text-wrapper {
+  .journey .text-wrapper {
     color: #000000;
     font-family: "Inter", Helvetica;
     font-size: 64px;
@@ -28,7 +28,7 @@
     width: 318px;
   }
   
-  .index .overlap {
+  .journey .overlap {
     height: 115px;
     left: 250px;
     position: absolute;
@@ -36,7 +36,7 @@
     width: 954px;
   }
   
-  .index .group {
+  .journey .group {
     height: 115px;
     left: 0;
     position: absolute;
@@ -44,14 +44,14 @@
     width: 954px;
   }
   
-  .index .overlap-group {
+  .journey .overlap-group {
     background-color: #ffffff;
     height: 115px;
     position: relative;
     width: 952px;
   }
   
-  .index .text-wrapper-2 {
+  .journey .text-wrapper-2 {
     color: #000000;
     font-family: "Inter", Helvetica;
     font-size: 64px;
@@ -64,7 +64,7 @@
     width: 661px;
   }
   
-  .index .img {
+  .journey .img {
     height: 80px;
     left: 848px;
     position: absolute;
@@ -72,7 +72,7 @@
     width: 80px;
   }
   
-  .index .text-wrapper-3 {
+  .journey .text-wrapper-3 {
     color: #000000;
     font-family: "Inter", Helvetica;
     font-size: 64px;

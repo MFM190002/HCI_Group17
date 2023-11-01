@@ -1,9 +1,10 @@
 import React from "react";
-import "./style.css";
+import "./SignupPage.css";
+import { Link } from "react-router-dom";
 
 function SignupPage() {
   return (
-    <div className="index">
+    <div className="signup">
       <div className="div">
         <div className="text-wrapper">Sign Up</div>
         <div className="overlap">
@@ -28,7 +29,9 @@ function SignupPage() {
             alt="Rectangle"
             src="https://cdn.animaapp.com/projects/65408ceb2ddc83e6bd71570e/releases/65408e081cff822e1265c0f3/img/rectangle-18.svg"
           />
-          <div className="text-wrapper-5">Sign Up</div>
+          <Link to="/journey" className="text-wrapper-5">
+            Sign Up
+          </Link>
         </div>
       </div>
     </div>

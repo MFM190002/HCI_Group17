@@ -1,4 +1,4 @@
-.index {
+.login {
     background-color: #a9d1f6;
     display: flex;
     flex-direction: row;
@@ -6,14 +6,14 @@
     width: 100%;
   }
   
-  .index .div {
+  .login .div {
     background-color: #a9d1f6;
     height: 1037px;
     position: relative;
     width: 1452px;
   }
   
-  .index .text-wrapper {
+  .login .text-wrapper {
     color: #000000;
     font-family: "Inter", Helvetica;
     font-size: 64px;
@@ -28,7 +28,7 @@
     width: 318px;
   }
   
-  .index .overlap-group {
+  .login .overlap-group {
     background-color: #d9d9d9;
     border-radius: 10px;
     height: 55px;
@@ -38,7 +38,7 @@
     width: 318px;
   }
   
-  .index .rectangle {
+  .login .rectangle {
     background-color: #d9d9d9;
     border-radius: 10px;
     height: 55px;
@@ -48,7 +48,7 @@
     width: 318px;
   }
   
-  .index .text-wrapper-2 {
+  .login .text-wrapper-2 {
     color: #000000;
     font-family: "Inter", Helvetica;
     font-size: 18px;
@@ -61,7 +61,7 @@
     top: 15px;
   }
   
-  .index .overlap {
+  .login .overlap {
     background-color: #d9d9d9;
     border-radius: 10px;
     height: 55px;
@@ -71,7 +71,7 @@
     width: 318px;
   }
   
-  .index .overlap-2 {
+  .login .overlap-2 {
     border-radius: 20px;
     height: 41px;
     left: 627px;
@@ -80,7 +80,7 @@
     width: 197px;
   }
   
-  .index .rectangle-2 {
+  .login .rectangle-2 {
     background-color: #000000;
     border: 1px solid;
     border-radius: 20px;
@@ -93,7 +93,7 @@
     width: 197px;
   }
   
-  .index .text-wrapper-3 {
+  .login .text-wrapper-3 {
     color: #000000;
     font-family: "Inter", Helvetica;
     font-size: 24px;
@@ -106,7 +106,7 @@
     top: 5px;
   }
   
-  .index .overlap-3 {
+  .login .overlap-3 {
     height: 49px;
     left: 623px;
     position: absolute;
@@ -114,7 +114,7 @@
     width: 205px;
   }
   
-  .index .img {
+  .login .img {
     height: 49px;
     left: 0;
     position: absolute;
@@ -122,7 +122,7 @@
     width: 205px;
   }
   
-  .index .text-wrapper-4 {
+  .login .text-wrapper-4 {
     color: #000000;
     font-family: "Inter", Helvetica;
     font-size: 24px;

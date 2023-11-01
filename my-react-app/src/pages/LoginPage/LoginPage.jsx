@@ -1,9 +1,9 @@
 import React from "react";
-import "./style.css";
-
+import "./LoginPage.css";
+import { Link } from "react-router-dom";
 function LoginPage() {
   return (
-    <div className="index">
+    <div className="login">
       <div className="div">
         <div className="text-wrapper">IDCollege</div>
         <div className="overlap-group">
@@ -36,7 +36,9 @@ function LoginPage() {
             alt="Rectangle"
             src="https://cdn.animaapp.com/projects/65408ceb2ddc83e6bd71570e/releases/65408e081cff822e1265c0f3/img/rectangle-8.svg"
           />
-          <div className="text-wrapper-4">Sign Up</div>
+          <Link to="/signup" className="text-wrapper-4">
+            Sign Up
+          </Link>
         </div>
       </div>
     </div>

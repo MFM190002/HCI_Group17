@@ -3,7 +3,7 @@ import "./HomePage.css";
 
 function HomePage() {
   return (
-    <div className="index">
+    <div className="home">
       <div className="div">
         <div className="text-wrapper">IDCollege</div>
         <div className="overlap">
