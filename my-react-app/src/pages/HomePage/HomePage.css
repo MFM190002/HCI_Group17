@@ -8,7 +8,7 @@
   
   .home .div {
     background-color: #a9d2f7;
-    height: 1037px;
+    height: 950px;
     overflow: hidden;
     position: relative;
     width: 1452px;
@@ -18,13 +18,13 @@
     color: #000000;
     font-family: "Inter", Helvetica;
     font-size: 64px;
-    font-weight: 400;
+    font-weight: bold;
     left: 567px;
     letter-spacing: 0;
     line-height: normal;
     position: absolute;
     text-align: center;
-    top: 118px;
+    top: 88px;
     white-space: nowrap;
     width: 318px;
   }
@@ -33,7 +33,7 @@
     height: 49px;
     left: 1160px;
     position: absolute;
-    top: 130px;
+    top: 100px;
     width: 205px;
   }
   
@@ -62,13 +62,13 @@
     color: #ffffff;
     font-family: "Inter", Helvetica;
     font-size: 36px;
-    font-weight: 400;
+    font-weight: bold;
     left: 726px;
     letter-spacing: 0;
     line-height: normal;
     position: absolute;
     text-align: center;
-    top: 458px;
+    top: 408px;
     width: 692px;
   }
   
@@ -76,20 +76,20 @@
     color: #ffffff;
     font-family: "Inter", Helvetica;
     font-size: 36px;
-    font-weight: 400;
+    font-weight: bold;
     left: 142px;
     letter-spacing: 0;
     line-height: normal;
     position: absolute;
     text-align: center;
-    top: 458px;
+    top: 408px;
   }
   
   .home .overlap-group {
     height: 101px;
     left: 113px;
     position: absolute;
-    top: 311px;
+    top: 251px;
     width: 1389px;
   }
   
@@ -213,6 +213,9 @@
   }
   
   .home .text-wrapper-8 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: #ffffff;
     font-family: "Inter", Helvetica;
     font-size: 32px;
@@ -239,7 +242,7 @@
     height: 48px;
     left: 872px;
     position: absolute;
-    top: 586px;
+    top: 536px;
     width: 441px;
   }
   
@@ -259,7 +262,7 @@
     font-size: 32px;
     font-weight: 400;
     height: 48px;
-    left: 123px;
+    left: 85px;
     letter-spacing: 0;
     line-height: normal;
     position: absolute;
@@ -272,7 +275,7 @@
     height: 48px;
     left: 872px;
     position: absolute;
-    top: 738px;
+    top: 688px;
     width: 492px;
   }
   
@@ -282,7 +285,7 @@
     font-size: 32px;
     font-weight: 400;
     height: 48px;
-    left: 105px;
+    left: 5px;
     letter-spacing: 0;
     line-height: normal;
     position: absolute;
@@ -295,7 +298,7 @@
     height: 48px;
     left: 872px;
     position: absolute;
-    top: 663px;
+    top: 613px;
     width: 441px;
   }
   
@@ -305,12 +308,19 @@
     font-size: 32px;
     font-weight: 400;
     height: 48px;
-    left: 157px;
+    left: 44px;
     letter-spacing: 0;
     line-height: normal;
     position: absolute;
     text-align: center;
     top: 0;
-    width: 282px;
+    width: 382px;
   }
-  
+
+  .home .view-friends {
+    height: 105px;
+    left: -4px;
+    position: relative;
+    width: 318px;
+    top: -300px;
+  }
