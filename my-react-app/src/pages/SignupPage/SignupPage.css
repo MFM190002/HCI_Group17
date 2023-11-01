@@ -1,145 +1,156 @@
 .signup {
-    background-color: #a9d2f7;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    width: 100%;
-  }
-  
-  .signup .div {
-    background-color: #a9d2f7;
-    height: 1037px;
-    position: relative;
-    width: 1452px;
-  }
-  
-  .signup .text-wrapper {
-    color: #000000;
-    font-family: "Inter", Helvetica;
-    font-size: 64px;
-    font-weight: 400;
-    left: 522px;
-    letter-spacing: 0;
-    line-height: normal;
-    position: absolute;
-    text-align: center;
-    top: 95px;
-    width: 408px;
-  }
-  
-  .signup .overlap {
-    height: 59px;
-    left: 567px;
-    position: absolute;
-    top: 298px;
-    width: 318px;
-  }
-  
-  .signup .rectangle {
-    background-color: #d9d9d9;
-    border-radius: 10px;
-    height: 55px;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 318px;
-  }
-  
-  .signup .text-wrapper-2 {
-    color: #000000;
-    font-family: "Inter", Helvetica;
-    font-size: 18px;
-    font-weight: 400;
-    left: 9px;
-    letter-spacing: 0;
-    line-height: normal;
-    position: absolute;
-    text-align: center;
-    top: 15px;
-  }
-  
-  .signup .overlap-group {
-    background-color: #d9d9d9;
-    border-radius: 10px;
-    height: 55px;
-    left: 567px;
-    position: absolute;
-    top: 408px;
-    width: 318px;
-  }
-  
-  .signup .text-wrapper-3 {
-    color: #000000;
-    font-family: "Inter", Helvetica;
-    font-size: 18px;
-    font-weight: 400;
-    left: 9px;
-    letter-spacing: 0;
-    line-height: normal;
-    position: absolute;
-    text-align: center;
-    top: 16px;
-  }
-  
-  .signup .overlap-2 {
-    background-color: #d9d9d9;
-    border-radius: 10px;
-    height: 55px;
-    left: 567px;
-    position: absolute;
-    top: 519px;
-    width: 318px;
-  }
-  
-  .signup .div-wrapper {
-    background-color: #d9d9d9;
-    border-radius: 10px;
-    height: 55px;
-    left: 567px;
-    position: absolute;
-    top: 630px;
-    width: 318px;
-  }
-  
-  .signup .text-wrapper-4 {
-    color: #000000;
-    font-family: "Inter", Helvetica;
-    font-size: 18px;
-    font-weight: 400;
-    left: 9px;
-    letter-spacing: 0;
-    line-height: normal;
-    position: absolute;
-    text-align: center;
-    top: 17px;
-  }
-  
-  .signup .overlap-group-2 {
-    height: 49px;
-    left: 623px;
-    position: absolute;
-    top: 788px;
-    width: 205px;
-  }
-  
-  .signup .img {
-    height: 49px;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 205px;
-  }
-  
-  .signup .text-wrapper-5 {
-    color: #000000;
-    font-family: "Inter", Helvetica;
-    font-size: 24px;
-    font-weight: 400;
-    left: 58px;
-    letter-spacing: 0;
-    line-height: normal;
-    position: absolute;
-    text-align: center;
-    top: 5px;
-  }
-  
+  background-color: #a9d2f7;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.signup .div {
+  background-color: #a9d2f7;
+  height: 1037px;
+  position: relative;
+  width: 1452px;
+}
+
+.signup .first-name-input {
+  background-color: #d9d9d9; /* Match the outer rectangle background color */
+  border: none; /* Remove border */
+  border-radius: 10px;
+  height: 40px;
+  left: 567px;
+  position: absolute;
+  top: 298px;
+  width: 318px;
+  padding: 10px; /* Add padding to match the rectangle */
+  color: #000; /* Match text color */
+  font-family: "Inter", Helvetica;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: normal;
+  text-align: center;
+}
+
+.signup .last-name-input {
+  background-color: #d9d9d9; /* Match the outer rectangle background color */
+  border: none; /* Remove border */
+  border-radius: 10px;
+  height: 40px;
+  left: 567px;
+  position: absolute;
+  top: 408px;
+  width: 318px;
+  padding: 10px; /* Add padding to match the rectangle */
+  color: #000; /* Match text color */
+  font-family: "Inter", Helvetica;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: normal;
+  text-align: center;
+}
+
+.signup .username-input {
+  background-color: #d9d9d9; /* Match the outer rectangle background color */
+  border: none; /* Remove border */
+  border-radius: 10px;
+  height: 40px;
+  left: 567px; /* Adjust the positioning to align with other fields */
+  position: absolute;
+  top: 519px; /* Adjust the positioning to align with other fields */
+  width: 318px; /* Adjust the width to match other fields */
+  padding: 10px; /* Add padding to match the rectangle */
+  color: #000; /* Match text color */
+  font-family: "Inter", Helvetica;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: normal;
+  text-align: center;
+}
+
+.signup .password-input {
+  background-color: #d9d9d9; /* Match the outer rectangle background color */
+  border: none; /* Remove border */
+  border-radius: 10px;
+  height: 40px;
+  left: 567px;
+  position: absolute;
+  top: 630px;
+  width: 318px;
+  padding: 10px; /* Add padding to match the rectangle */
+  color: #000; /* Match text color */
+  font-family: "Inter", Helvetica;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: normal;
+  text-align: center;
+}
+
+.signup .confirm-password-input {
+  background-color: #d9d9d9; /* Match the outer rectangle background color */
+  border: none; /* Remove border */
+  border-radius: 10px;
+  height: 40px;
+  left: 567px;
+  position: absolute;
+  top: 741px; /* Adjust the top position to match other fields */
+  width: 318px;
+  padding: 10px; /* Add padding to match the rectangle */
+  color: #000; /* Match text color */
+  font-family: "Inter", Helvetica;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: normal;
+  text-align: center;
+}
+
+.signup .text-wrapper {
+  color: #000000;
+  font-family: "Inter", Helvetica;
+  font-size: 64px;
+  font-weight: 400;
+  left: 522px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  text-align: center;
+  top: 95px;
+  width: 408px;
+}
+
+.signup .text {
+  color: #000000;
+  font-family: "Inter", Helvetica;
+  font-size: 18px;
+  font-weight: 400;
+  left: 0px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  text-align: center;
+  top: 15px;
+}
+.signup .overlap-group-2 {
+  height: 49px;
+  left: 623px;
+  position: absolute;
+  top: 898px; /* Adjust the top position to match other fields */
+  width: 205px;
+}
+
+.signup .text-wrapper-5 {
+  color: #000000;
+  font-family: "Inter", Helvetica;
+  font-size: 24px;
+  font-weight: 400;
+  left: 58px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  text-align: center;
+  top: 5px;
+}

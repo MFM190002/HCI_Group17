@@ -1,41 +1,85 @@
-import React from "react";
+import React, { useState } from "react";
 import "./SignupPage.css";
 import { Link } from "react-router-dom";
 
 function SignupPage() {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [username, setUsername] = useState(""); // New state for Username
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handleSignup = () => {
+    // Here you can perform password encoding and signup logic
+    // For simplicity, let's just log the values
+    console.log("First Name:", firstName);
+    console.log("Last Name:", lastName);
+    console.log("Username:", username);
+    console.log("Password:", password);
+    console.log("Confirm Password:", confirmPassword);
+  };
+
   return (
     <div className="signup">
       <div className="div">
         <div className="text-wrapper">Sign Up</div>
-        <div className="overlap">
-          <div className="rectangle" />
-          <div className="rectangle" />
-          <div className="text-wrapper-2">First Name</div>
+        <div className="text">
+          <input
+            type="text"
+            placeholder="First Name"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            className="first-name-input" // Add this class
+          />
         </div>
-        <div className="overlap-group">
-          <div className="text-wrapper-3">Last Name</div>
+        <div className="text">
+          <input
+            type="text"
+            placeholder="Last Name"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            className="last-name-input" // Add this class
+          />
         </div>
-        <div className="overlap-2">
-          <div className="rectangle" />
-          <div className="rectangle" />
-          <div className="text-wrapper-2">Password</div>
+        <div className="text">
+          <input
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="username-input" // Add this class
+          />
         </div>
-        <div className="div-wrapper">
-          <div className="text-wrapper-4">Confirm Password</div>
+        <div className="text">
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={handlePasswordChange}
+            className="password-input"
+          />
+        </div>
+        <div className="text">
+          <input
+            type="password"
+            placeholder="Confirm Password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            className="confirm-password-input"
+          />
         </div>
         <div className="overlap-group-2">
-          <img
-            className="img"
-            alt="Rectangle"
-            src="https://cdn.animaapp.com/projects/65408ceb2ddc83e6bd71570e/releases/65408e081cff822e1265c0f3/img/rectangle-18.svg"
-          />
-          <Link to="/journey" className="text-wrapper-5">
+          <button className="text-wrapper-5" onClick={handleSignup}>
             Sign Up
-          </Link>
+          </button>
         </div>
       </div>
     </div>
   );
-};
+}
 
 export default SignupPage;
