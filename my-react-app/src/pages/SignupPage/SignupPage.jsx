@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./SignupPage.css";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function SignupPage() {
   const [firstName, setFirstName] = useState("");
@@ -8,6 +9,7 @@ function SignupPage() {
   const [username, setUsername] = useState(""); // New state for Username
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const navigate = useNavigate();
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
@@ -21,6 +23,7 @@ function SignupPage() {
     console.log("Username:", username);
     console.log("Password:", password);
     console.log("Confirm Password:", confirmPassword);
+    navigate('/journey');
   };
 
   return (
