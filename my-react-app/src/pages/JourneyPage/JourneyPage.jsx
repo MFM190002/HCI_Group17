@@ -7,7 +7,8 @@ import submit from "./icons8-enter-64.png";
 export const JourneyPage = () => {
   const navigate = useNavigate();
   const [isCustomGoal, setIsCustomGoal] = useState(false);
-  const [selectedGoal, setSelectedGoal] = useState(""); // Initialize selectedGoal state
+  const [selectedGoal, setSelectedGoal] = useState("");
+  const [customGoal, setCustomGoal] = useState(""); // State to store the custom goal
 
   const handleButtonClick = () => {
     navigate("/home");
@@ -15,6 +16,10 @@ export const JourneyPage = () => {
 
   const handleInputKeyPress = (event) => {
     if (event.key === "Enter") {
+      // Process the custom goal or navigate
+      if (isCustomGoal && customGoal) {
+        console.log("Custom goal set:", customGoal); // Replace with goal processing logic
+      }
       navigate("/home");
     }
   };
@@ -23,11 +28,11 @@ export const JourneyPage = () => {
     const selectedValue = event.target.value;
     setSelectedGoal(selectedValue);
 
-    if (selectedValue === "Custom Goal") {
-      setIsCustomGoal(true);
-    } else {
-      setIsCustomGoal(false);
-    }
+    setIsCustomGoal(selectedValue === "Custom Goal");
+  };
+
+  const handleCustomGoalChange = (event) => {
+    setCustomGoal(event.target.value);
   };
 
   return (
@@ -36,32 +41,33 @@ export const JourneyPage = () => {
         <div className="text-wrapper">IDCollege</div>
         <div className="overlap">
           <div className="group">
-            {isCustomGoal ? ( // Show custom input when isCustomGoal is true
+            <select
+              name="goals"
+              className="text-wrapper-5 input-box"
+              value={selectedGoal}
+              onChange={handleGoalSelect}
+            >
+              <option value="">Select your goal</option>
+              <option value="Curated College Application Guide">
+                Follow our Curated College Application Guide
+              </option>
+              <option value="Curated Scholarship Application Guide">
+                Follow our Curated Scholarship Application Guide
+              </option>
+              <option value="Custom Goal">I want to set my own goal</option>
+            </select>
+            {isCustomGoal && (
               <input
                 type="text"
                 className="text-wrapper-5 input-box"
                 placeholder="Type your goal"
+                value={customGoal}
+                onChange={handleCustomGoalChange}
                 onKeyPress={handleInputKeyPress}
               />
-            ) : (
-              // Show drop-down list when isCustomGoal is false
-              <select
-                name="goals"
-                className="text-wrapper-5 input-box"
-                value={selectedGoal}
-                onChange={handleGoalSelect}
-              >
-                <option value="Curated College Application Guide">
-                  Follow our Curated College Application Guide
-                </option>
-                <option value="Curated Scholarship Application Guide">
-                  Follow our Curated Scholarship Application Guide
-                </option>
-                <option value="Custom Goal">I want to set my own goal</option>
-              </select>
             )}
-            <Link to="/home">
-              <img className="img" alt="Rectangle" src={submit} />
+            <Link to="/home" onClick={handleButtonClick}>
+              <img className="img" alt="Submit" src={submit} />
             </Link>
           </div>
         </div>
