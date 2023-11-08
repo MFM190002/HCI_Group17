@@ -20,7 +20,7 @@
   position: absolute;
   text-align: center;
   left: 50%;
-  top: 118px;
+  top: 230px;
   transform: translateX(-50%); /* Center the element */
 }
 

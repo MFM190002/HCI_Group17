@@ -6,24 +6,32 @@ import { useNavigate } from "react-router-dom";
 function SignupPage() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [username, setUsername] = useState(""); // New state for Username
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [passwordError, setPasswordError] = useState(""); // New state for password error
   const navigate = useNavigate();
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
 
+  const handleConfirmPasswordChange = (e) => {
+    setConfirmPassword(e.target.value);
+  };
+
   const handleSignup = () => {
-    // Here you can perform password encoding and signup logic
-    // For simplicity, let's just log the values
-    console.log("First Name:", firstName);
-    console.log("Last Name:", lastName);
-    console.log("Username:", username);
-    console.log("Password:", password);
-    console.log("Confirm Password:", confirmPassword);
-    navigate('/journey');
+    if (password !== confirmPassword) {
+      setPasswordError("Passwords do not match");
+    } else {
+      setPasswordError(""); // Clear the error if passwords match
+      console.log("First Name:", firstName);
+      console.log("Last Name:", lastName);
+      console.log("Username:", username);
+      console.log("Password:", password);
+      console.log("Confirm Password:", confirmPassword);
+      navigate('/journey');
+    }
   };
 
   return (
@@ -36,7 +44,7 @@ function SignupPage() {
             placeholder="First Name"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
-            className="first-name-input" // Add this class
+            className="first-name-input"
           />
         </div>
         <div className="text">
@@ -45,7 +53,7 @@ function SignupPage() {
             placeholder="Last Name"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
-            className="last-name-input" // Add this class
+            className="last-name-input"
           />
         </div>
         <div className="text">
@@ -54,7 +62,7 @@ function SignupPage() {
             placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            className="username-input" // Add this class
+            className="username-input"
           />
         </div>
         <div className="text">
@@ -71,9 +79,10 @@ function SignupPage() {
             type="password"
             placeholder="Confirm Password"
             value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
+            onChange={handleConfirmPasswordChange}
             className="confirm-password-input"
           />
+          {passwordError && <p className="password-error">{passwordError}</p>}
         </div>
         <div className="overlap-group-2">
           <button className="text-wrapper-5" onClick={handleSignup}>
