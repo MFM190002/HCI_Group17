@@ -13,11 +13,11 @@ function App() {
           <Route path="/journey" element={<JourneyPage />} />
           <Route path="/" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage/>} />
-          <Route path="/friends" element={<FriendsPage/>}/>
+          {/* <Route path="/friends" element={<FriendsPage/>}/>
           <Route path="/friendsconfirmation" element={<FriendConfirmationPage/>}/>
           <Route path="/checkpoints" element={<CheckpointsPage/>}/>
           <Route path="/checkpointconfirmation" element={<CheckpointConfirmationPage/>}/>
-          <Route path="/addfriends" element={<AddFriendPage/>}/>
+          <Route path="/addfriends" element={<AddFriendPage/>}/> */}
         </Routes>
       </BrowserRouter>
     </div>
