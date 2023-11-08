@@ -154,3 +154,13 @@
   text-align: center;
   top: 5px;
 }
+
+.signup .password-error {
+  color: #ff0000; /* Red color for error message */
+  font-size: 20px; /* Adjust the font size */
+  position: absolute;
+  top: 810px; /* Adjust the top position to align the error message in the middle */
+  left: 580px; /* Match the left position with the input fields */
+  width: 318px; /* Match the width with the input fields */
+  text-align: center; /* Center-align the text */
+}
