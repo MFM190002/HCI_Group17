@@ -1,0 +1,91 @@
+/* CheckpointsPage.css */
+.checkpoints-page {
+    background-color: #a9d2f7;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    height: 100vh;
+  }
+  
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .nav-button {
+    background-color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .progress-section {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 500px; /* Adjust the width as necessary */
+  }
+  
+  .progress-title {
+    font-size: 18px;
+    color: #000000;
+    margin-bottom: 10px;
+  }
+  
+  .progress-bar {
+    background-color: #d9d9d9;
+    border-radius: 10px;
+    width: 100%;
+    height: 20px;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  
+  .progress {
+    background-color: #f0abab;
+    height: 100%;
+    width: 50%; /* This should be dynamic based on progress */
+    border-radius: 10px;
+  }
+  
+  .checkpoints-list {
+    list-style: none;
+    padding-left: 20px; /* Adjust the padding as necessary */
+  }
+  
+  .checkpoints-list li {
+    margin-bottom: 10px;
+    position: relative;
+  }
+  
+  .checkpoints-list li::before {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background-color: #f0abab;
+    border-radius: 50%;
+    position: absolute;
+    left: -20px; /* Adjust the position as necessary */
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  .add-checkpoint-button {
+    background-color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 20px;
+    cursor: pointer;
+    font-size: 18px;
+  }
+  
