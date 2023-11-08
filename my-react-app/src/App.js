@@ -4,6 +4,11 @@ import HomePage from './pages/HomePage/HomePage';
 import { JourneyPage } from './pages/JourneyPage/JourneyPage';
 import LoginPage from './pages/LoginPage/LoginPage';
 import SignupPage from './pages/SignupPage/SignupPage';
+import FriendsPage from './pages/FriendsPage/FriendsPage';
+import AddFriendPage from './pages/AddFriendPage/AddFriendPage';
+import FriendConfirmationPage from './pages/FriendConfirmationPage/FriendConfirmationPage';
+import CheckpointConfirmationPage from './pages/CheckpointConfirmationPage/CheckpointConfirmationPage';
+import CheckpointsPage from './pages/CheckpointsPage/CheckpointsPage';
 function App() {
   return (
     <div className="App">

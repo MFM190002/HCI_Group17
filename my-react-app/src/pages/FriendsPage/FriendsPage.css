@@ -1,0 +1,33 @@
+.friends-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+  }
+  
+  .friends-list {
+    display: flex;
+    flex-direction: column; /* Change to column */
+    align-items: center;
+    gap: 10px;
+    margin: 20px 0;
+  }
+  
+  .add-friend-button {
+    display: block;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+  }
+  
+  .add-friend-button:hover {
+    background-color: #0056b3;
+  }
+  
