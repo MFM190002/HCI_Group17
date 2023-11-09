@@ -1,33 +1,38 @@
+/* FriendsPage.css */
 .friends-page {
+    background-color: #a9d2f7; /* Light blue background like AddFriendPage */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
     text-align: center;
+    padding: 20px; /* Added padding to match AddFriendPage */
   }
   
   .friends-list {
     display: flex;
-    flex-direction: column; /* Change to column */
+    flex-direction: column;
     align-items: center;
     gap: 10px;
     margin: 20px 0;
   }
   
+  /* Updated button styles to match AddFriendPage's button */
   .add-friend-button {
-    display: block;
-    background-color: #007bff;
-    color: #fff;
+    background-color: #ffffff; /* White background for the button */
+    color: #000000; /* Black text color */
     text-decoration: none;
     padding: 10px 20px;
-    border-radius: 5px;
+    border-radius: 20px; /* Increased border-radius to match AddFriendPage's search-section */
     font-size: 16px;
     transition: background-color 0.3s;
     margin-top: 20px;
+    border: none; /* Remove border for a cleaner look */
+    cursor: pointer; /* Cursor pointer to indicate it's clickable */
   }
   
   .add-friend-button:hover {
-    background-color: #0056b3;
+    background-color: #c2dfff; /* Lighter blue for hover effect */
   }
   

@@ -1,27 +1,40 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'; // Assuming you are using React Router
-
-import FriendComponent from './FriendComponent/FriendComponent'; // Import your FriendComponent here
-
-import './FriendsPage.css'; // Import the CSS file
+import { Link } from 'react-router-dom';
+import FriendComponent from './FriendComponent/FriendComponent';
+import './FriendsPage.css';
 
 class FriendsPage extends Component {
   constructor() {
     super();
     this.state = {
       friends: [
-        // Initialize this array with your current friends' data
         { id: 1, name: 'Friend 1' },
         { id: 2, name: 'Friend 2' },
-        // Add more friends as needed
+        // ...other friends
       ],
     };
   }
 
   renderFriendsList() {
-    return this.state.friends.map((friend) => (
-      <FriendComponent key={friend.id} friend={friend} />
-    ));
+    // Map through friends and render the FriendComponent for each
+    const listItems = this.state.friends.map((friend, index, array) => {
+      // Check if the current friend is the last in the array
+      const isLastFriend = index === array.length - 1;
+
+      return (
+        <React.Fragment key={friend.id}>
+          <FriendComponent friend={friend} />
+          {/* If it's the last friend, render the "Add a Friend" button below */}
+          {isLastFriend && (
+            <Link to="/addfriends" className="add-friend-button">
+              Add a Friend
+            </Link>
+          )}
+        </React.Fragment>
+      );
+    });
+
+    return listItems;
   }
 
   render() {
@@ -29,9 +42,6 @@ class FriendsPage extends Component {
       <div className="friends-page">
         <h1>My Friends</h1>
         <div className="friends-list">{this.renderFriendsList()}</div>
-        <Link to="/addfriends" className="add-friend-button">
-          Add a Friend
-        </Link>
       </div>
     );
   }
