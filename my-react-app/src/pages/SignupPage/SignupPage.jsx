@@ -36,9 +36,9 @@ function SignupPage() {
 
   return (
     <div className="signup">
-      <div className="div">
-        <div className="text-wrapper">Sign Up</div>
-        <div className="text">
+      <div className="signup-div">
+        <div className="signup-header">Sign Up</div>
+        <div className="signup-text">
           <input
             type="text"
             placeholder="First Name"
@@ -47,7 +47,7 @@ function SignupPage() {
             className="first-name-input"
           />
         </div>
-        <div className="text">
+        <div className="signup-text">
           <input
             type="text"
             placeholder="Last Name"
@@ -56,7 +56,7 @@ function SignupPage() {
             className="last-name-input"
           />
         </div>
-        <div className="text">
+        <div className="signup-text">
           <input
             type="text"
             placeholder="Username"
@@ -65,7 +65,7 @@ function SignupPage() {
             className="username-input"
           />
         </div>
-        <div className="text">
+        <div className="signup-text">
           <input
             type="password"
             placeholder="Password"
@@ -74,7 +74,7 @@ function SignupPage() {
             className="password-input"
           />
         </div>
-        <div className="text">
+        <div className="signup-text">
           <input
             type="password"
             placeholder="Confirm Password"
@@ -84,10 +84,9 @@ function SignupPage() {
           />
           {passwordError && <p className="password-error">{passwordError}</p>}
         </div>
-        <div className="overlap-group-2">
-          <button className="text-wrapper-5" onClick={handleSignup}>
-            Sign Up
-          </button>
+        <div className="signuppage-button" onClick = {handleSignup}>
+          <div className="signup-rectangle" />
+          <div className="signup-button-text">Sign Up</div>
         </div>
       </div>
     </div>

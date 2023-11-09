@@ -6,7 +6,7 @@
   width: 100%;
 }
 
-.signup .div {
+.signup .signup-div {
   background-color: #a9d2f7;
   height: 1170px;
   position: relative;
@@ -108,7 +108,7 @@
   text-align: center;
 }
 
-.signup .text-wrapper {
+.signup .signup-header {
   color: #000000;
   font-family: "Inter", Helvetica;
   font-size: 64px;
@@ -122,7 +122,7 @@
   width: 408px;
 }
 
-.signup .text {
+.signup .signup-text {
   color: #000000;
   font-family: "Inter", Helvetica;
   font-size: 18px;
@@ -134,25 +134,32 @@
   text-align: center;
   top: 15px;
 }
-.signup .overlap-group-2 {
+.signup .signuppage-button {
   height: 49px;
   left: 623px;
   position: absolute;
   top: 898px; /* Adjust the top position to match other fields */
   width: 205px;
+  cursor: pointer
 }
 
-.signup .text-wrapper-5 {
+.signup .signup-button-text {
   color: #000000;
   font-family: "Inter", Helvetica;
   font-size: 24px;
-  font-weight: 400;
-  left: 58px;
-  letter-spacing: 0;
-  line-height: normal;
   position: absolute;
   text-align: center;
-  top: 5px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center the element */
+}
+
+.signup .signup-rectangle {
+  background-color: #000000;
+  opacity: 0.2;
+  border-radius: 20px;
+  height: 100%;
+  box-shadow: 0px 4px 4px #00000040;
 }
 
 .signup .password-error {
