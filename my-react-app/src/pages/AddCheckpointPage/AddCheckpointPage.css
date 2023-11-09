@@ -1,0 +1,53 @@
+.add-checkpoint {
+    background-color: #a9d1f6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .add-checkpoint .div {
+    background-color: #a9d1f6;
+    height: 1037px;
+    width: 1452px;
+    position: relative;
+  }
+  
+  .add-checkpoint .text-wrapper {
+    color: #000000;
+    font-family: "Inter", Helvetica;
+    font-size: 64px;
+    position: absolute;
+    text-align: center;
+    left: 50%;
+    top: 230px;
+    transform: translateX(-50%);
+  }
+  
+  .add-checkpoint .input-container {
+    position: absolute;
+    text-align: center;
+    width: 318px;
+    height: 500px;
+    left: 45%;
+    font-size: 60px;
+    transform: translateX(-50%);
+    top: 438px;
+  }
+  
+  .add-checkpoint .rectangle {
+    background-color: #ffffff;
+    border-radius: 10px;
+    height: 50px;
+    width: 500px;
+  }
+  
+  .img {
+    height: 60px;
+    left: 450px;
+    position: absolute;
+    top: 0px;
+    width: 60px;
+  }
+  
+  

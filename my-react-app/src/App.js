@@ -7,7 +7,7 @@ import SignupPage from './pages/SignupPage/SignupPage';
 import FriendsPage from './pages/FriendsPage/FriendsPage';
 import AddFriendPage from './pages/AddFriendPage/AddFriendPage';
 import FriendConfirmationPage from './pages/FriendConfirmationPage/FriendConfirmationPage';
-import AddCheckpointPage from './pages/AddCheckpointPage/AddCheckpoint';
+import AddCheckpointPage from './pages/AddCheckpointPage/AddCheckpointPage';
 import CheckpointsPage from './pages/CheckpointsPage/CheckpointsPage';
 function App() {
   return (
