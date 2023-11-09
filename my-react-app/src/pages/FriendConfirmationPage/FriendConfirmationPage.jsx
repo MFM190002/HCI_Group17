@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './FriendConfirmationPage.css';
-import friendImage from './path-to-travis-scott-image.jpg'; // Update with the correct path
+//import friendImage from './path-to-travis-scott-image.jpg'; // Update with the correct path
 
 function FriendConfirmationPage() {
   return (
@@ -13,7 +13,7 @@ function FriendConfirmationPage() {
       </div>
 
       <div className="confirmation-section">
-        <img src={friendImage} alt="Travis Scott" className="friend-image"/>
+        {/* <img src={friendImage} alt="Travis Scott" className="friend-image"/> */}
         <div className="friend-info">
           <div className="friend-name">Travis Scott</div>
           <button className="add-friend-button">+</button>
