@@ -20,35 +20,35 @@ function LoginPage() {
 
   return (
     <div className="login">
-      <div className="div">
-        <div className="text-wrapper">IDCollege</div>
+      <div className="login-div">
+        <div className="login-IDCollege-text">IDCollege</div>
         <form onSubmit={handleSubmit}>
-          <div className="overlap-group">
+          <div className="login-username">
             <input
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               placeholder="username"
-              className="rectangle"
+              className="login-rectangle"
             />
           </div>
-          <div className="overlap">
+          <div className="login-password">
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="password"
-              className="rectangle"
+              className="login-rectangle"
             />
           </div>
-          <div className="overlap-2" onClick={handleSubmit}>
-            <div className="rectangle-2" />
-            <div className="text-wrapper-3">Login</div>
+          <div className="login-button" onClick={handleSubmit}>
+            <div className="login-rectangle2" />
+            <div className="login-button-text">Login</div>
           </div>
         </form>
-        <div className="overlap-3" onClick={handleButtonClick}>
-          <div className="rectangle-2" />
-          <div className="text-wrapper-3">Sign Up</div>
+        <div className="signup-button" onClick={handleButtonClick}>
+          <div className="login-rectangle2" />
+          <div className="login-button-text">Sign Up</div>
         </div>
       </div>
     </div>
