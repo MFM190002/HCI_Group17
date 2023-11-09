@@ -88,11 +88,12 @@
 
 .login .overlap-3 {
   position: absolute;
-  width: 205px;
-  height: 49px;
+  width: 197px;
+  height: 41px;
   left: 50%;
-  top: 786px;
+  top: 800px;
   transform: translateX(-50%); /* Center the element */
+  cursor: pointer; /* Make it appear clickable */
 }
 
 .login .img {
@@ -107,7 +108,7 @@
   position: absolute;
   text-align: center;
   top: 50%;
-  left: 50%;
+  left: -140px;
   transform: translate(-50%, -50%); /* Center the element */
   text-decoration: underline; /* Make it more noticeable */
   cursor: pointer; /* Make it appear clickable */
