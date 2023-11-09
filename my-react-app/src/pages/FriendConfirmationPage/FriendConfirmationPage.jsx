@@ -1,6 +1,6 @@
 // FriendConfirmationPage.jsx
 import React from 'react';
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 import './FriendConfirmationPage.css';
 //import friendImage from './path-to-travis-scott-image.jpg'; // Update with the correct path
 
