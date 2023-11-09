@@ -10,6 +10,7 @@ class FriendsPage extends Component {
       friends: [
         { id: 1, name: 'Friend 1' },
         { id: 2, name: 'Friend 2' },
+        { id: 3, name: 'Friend 3' },
         // ...other friends
       ],
     };
