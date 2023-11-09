@@ -1,3 +1,5 @@
+// Updated HomePage component with buttons
+
 import React from "react";
 import "./HomePage.css";
 import { Link } from "react-router-dom";
@@ -21,27 +23,26 @@ function HomePage() {
             Sign Out
           </Link>
         </div>
-        <div className="checkpoints-container" >
-          <div className="upcoming-checkpoints">Your Upcoming Checkpoints</div>
-          <div className="checkpoints-list">
-            <div className="checkpoint">
-              <div className="checkpoint-icon"></div>
-              <div className="checkpoint-text">Research 5 Colleges</div>
-            </div>
-            <div className="checkpoint">
-              <div className="checkpoint-icon"></div>
-              <div className="checkpoint-text">Fill out FAFSA</div>
-            </div>
-            <div className="checkpoint">
-              <div className="checkpoint-icon"></div>
-              <div className="checkpoint-text">Create your resume</div>
-            </div>
+        <div className="upcoming-checkpoints">Your Upcoming Checkpoints</div>
+        <div className="checkpoints-list">
+          <div className="checkpoint">
+            <div className="checkpoint-icon"></div>
+            <div className="checkpoint-text">Research 5 Colleges</div>
           </div>
-          <Link to="/checkpoints" className="view-checkpoints-link"> View Checkpoints </Link>
+          <div className="checkpoint">
+            <div className="checkpoint-icon"></div>
+            <div className="checkpoint-text">Fill out FAFSA</div>
+          </div>
+          <div className="checkpoint">
+            <div className="checkpoint-icon"></div>
+            <div className="checkpoint-text">Create your resume</div>
+          </div>
         </div>
-
+        <Link to="/checkpoints" className="view-checkpoints-link">View Checkpoints</Link>
+        <Link to="/friends" className="view-friends-link">View Friends</Link> {/* "View Friends" button */}
+        
         <div className="friends-leaderboard">Friends Leaderboard</div>
-        <Link to="/friends">View Friends</Link>
+        
         <div className="progress-section">
           <div className="progress-label">Progress</div>
           <div className="progress-bar-container">
