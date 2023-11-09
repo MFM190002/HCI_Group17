@@ -1,13 +1,19 @@
 // Updated HomePage component with buttons
 
-import React from "react";
+import React, { useState } from "react";
 import "./HomePage.css";
 import { Link } from "react-router-dom";
-
+import ProgressComponent from "./ProgressComponent/ProgressComponent";
+import CheckpointComponent from "./CheckpointComponent/CheckpointComponent";
 function HomePage() {
   // Placeholder for dynamic progress percentage (you'll need to replace this with actual state logic)
-  const progressPercentage = 50;
-
+  const [progress, setProgress] = useState(50);
+    // You can update the progress state as needed, perhaps based on user interactions or data fetching
+  const handleUpdateProgress = () => {
+    // Example: Increment progress by 10%
+    setProgress((prevProgress) => prevProgress + 10);
+  };
+  const checkpoints = ["Research 5 Colleges", "Fill out FAFSA", "Create your resume"];
   return (
     <div className="friends-container">
       <div className="content">
@@ -23,35 +29,24 @@ function HomePage() {
             Sign Out
           </Link>
         </div>
-        <div className="upcoming-checkpoints">Your Upcoming Checkpoints</div>
         <div className="checkpoints-list">
-          <div className="checkpoint">
-            <div className="checkpoint-icon"></div>
-            <div className="checkpoint-text">Research 5 Colleges</div>
+          <div className="upcoming-checkpoints">Your Upcoming Checkpoints</div>
+          <div className="checkpoint-container">
+            {checkpoints.map((checkpoint, index) => (
+              <CheckpointComponent key={index} checkpoint={checkpoint} />
+            ))}
           </div>
-          <div className="checkpoint">
-            <div className="checkpoint-icon"></div>
-            <div className="checkpoint-text">Fill out FAFSA</div>
-          </div>
-          <div className="checkpoint">
-            <div className="checkpoint-icon"></div>
-            <div className="checkpoint-text">Create your resume</div>
-          </div>
+          <Link to="/checkpoints" className="view-checkpoints-link">View Checkpoints</Link>
         </div>
-        <Link to="/checkpoints" className="view-checkpoints-link">View Checkpoints</Link>
-        <Link to="/friends" className="view-friends-link">View Friends</Link> {/* "View Friends" button */}
+        <div className="friends-list">
+          <div className="friends-leaderboard">Friends Leaderboard</div>
+          <Link to="/friends" className="view-friends-link">View Friends</Link> {/* "View Friends" button */}
+        </div>
         
-        <div className="friends-leaderboard">Friends Leaderboard</div>
         
-        <div className="progress-section">
-          <div className="progress-label">Progress</div>
-          <div className="progress-bar-container">
-            <div
-              className="progress-bar"
-              style={{ width: `${progressPercentage}%` }}
-            ></div>
-          </div>
-          <div className="progress-percentage">{progressPercentage}% Complete</div>
+        <ProgressComponent progressPercentage={progress} />
+        <div className="update-progress">
+          <button onClick={handleUpdateProgress}>Update Progress</button>
         </div>
       </div>
     </div>

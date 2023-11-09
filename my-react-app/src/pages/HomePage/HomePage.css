@@ -22,7 +22,6 @@
   text-align: center;
   position: absolute;
   top: 88px;
-  left: 567px;
 }
 
 .logout-button {
@@ -59,9 +58,7 @@
   font-weight: bold;
   text-align: center;
   position: absolute;
-  top: 408px;
-  left: 726px;
-  width: 692px;
+  margin-top: 20px;
 }
 
 .friends-leaderboard {
@@ -70,57 +67,9 @@
   font-size: 36px;
   font-weight: bold;
   text-align: center;
-  position: absolute;
-  top: 408px;
-  left: 142px;
 }
 
-.progress-section {
-  height: 101px;
-  position: absolute;
-  top: 251px;
-  left: 113px;
-  width: 1389px;
-}
 
-.progress-label {
-  color: #ffffff;
-  font-family: "Inter", Helvetica;
-  font-size: 48px;
-  font-weight: 400;
-  text-align: center;
-  position: absolute;
-  top: 3px;
-  left: 0;
-  width: 383px;
-}
-
-.progress-bar-container {
-  background-color: #d9d9d9;
-  border-radius: 15px;
-  height: 53px;
-  position: absolute;
-  top: 4px;
-  left: 306px;
-  width: 751px;
-  overflow: hidden;
-}
-
-.progress-bar {
-  height: 53px;
-  background-color: #a200ff; /* Progress bar color */
-  width: 100%; /* Initialize progress bar width to 100% */
-}
-
-.progress-percentage {
-  color: #000000;
-  font-family: "Inter", Helvetica;
-  font-size: 24px;
-  font-weight: bold;
-  position: absolute;
-  top: 15px;
-  left: 1060px;
-}
 
 .view-friends-section {
   height: 105px;
@@ -138,8 +87,7 @@
   font-weight: 400;
   text-align: center;
   position: absolute;
-  top: 600px; /* Adjust the top position as needed */
-  left: 230px; /* Adjust the left position as needed */
+  top: 75px;
   width: 205px;
   height: 49px;
   background-color: #51585f; /* Background color for the button */
@@ -159,8 +107,7 @@
   font-weight: 400;
   text-align: center;
   position: absolute;
-  top: 800px; /* Adjust the top position as needed */
-  left: 920px; /* Adjust the left position as needed */
+  top: 300px;
   width: 205px;
   height: 49px;
   background-color: #51585f; /* Background color for the button */
@@ -184,30 +131,31 @@
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  position: absolute;
-  top: 580px;
+  position: relative;
+  top: 388px;
   left: 750px;
   width: 500px;
 }
 
-.checkpoint {
+.checkpoint-container {
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: absolute;
+  gap: 20px;
+  top: 100px;
+}
+
+.friends-list{
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  position: relative;
+  top: 388px;
+  right: 300px;
 }
 
-.checkpoint-icon {
-  background-color: #007bff; /* You can adjust the background color */
-  border-radius: 50%; /* Create a circular shape */
-  width: 40px; /* Adjust the width and height as needed */
-  height: 40px;
-  margin-right: 10px; /* Add some spacing between the icon and text */
-}
-
-.checkpoint-text {
-  color: #ffffff;
-  font-family: "Inter", Helvetica;
-  font-size: 32px;
-  font-weight: 400;
-  line-height: normal;
-  text-align: center;
+.update-progress{
+  position: absolute;
+  top: 100px;
 }

@@ -1,0 +1,49 @@
+/* ProgressComponent.css */
+
+.home-progress-section {
+    height: 101px;
+    position: absolute;
+    top: 251px;
+    left: 113px;
+  }
+  
+  .progress-label {
+    color: #ffffff;
+    font-family: "Inter", Helvetica;
+    font-size: 48px;
+    font-weight: 400;
+    text-align: center;
+    position: absolute;
+    top: 3px;
+    left: 0;
+    width: 383px;
+  }
+  
+  .progress-bar-container {
+    background-color: #d9d9d9;
+    border-radius: 15px;
+    height: 53px;
+    position: absolute;
+    top: 4px;
+    left: 306px;
+    width: 751px;
+    overflow: hidden;
+  }
+  
+  .home-progress-bar {
+    height: 100%; /* Set height to 100% to fill the container */
+    background-color:#a200ff; /* Progress bar color */
+    transition: width 0.3s ease; /* Add smooth transition for width changes */
+    z-index: 1;
+  }
+  
+  .progress-percentage {
+    color: #000000;
+    font-family: "Inter", Helvetica;
+    font-size: 24px;
+    font-weight: bold;
+    position: absolute;
+    top: 15px;
+    left: 1060px;
+  }
+  
