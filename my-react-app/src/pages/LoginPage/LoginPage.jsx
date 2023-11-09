@@ -10,7 +10,7 @@ function LoginPage() {
     event.preventDefault();
     console.log("Submitted credentials:", username, password);
 
-    // TODO: Handle authentication logic here
+    // TODO: Handle authentication logic herenp
   };
 
   return (
