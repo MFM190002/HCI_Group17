@@ -1,13 +1,23 @@
-/* CheckpointsPage.css */
+
+  /* CheckpointsPage.css */
 .checkpoints-page {
-    background-color: #a9d2f7;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    height: 100vh;
-  }
-  
+  background-color: #a9d2f7;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  height: 100vh;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 800px; /* Adjust the width as necessary */
+  margin: 0 auto; /* Center the content horizontally */
+}
   .nav {
     display: flex;
     justify-content: space-between;
@@ -57,35 +67,41 @@
     width: 50%; /* This should be dynamic based on progress */
     border-radius: 10px;
   }
-  
-  .checkpoints-list {
-    list-style: none;
-    padding-left: 20px; /* Adjust the padding as necessary */
+
+  .page-checkpoints-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   
-  .checkpoints-list li {
-    margin-bottom: 10px;
+  .page-checkpoint-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     position: relative;
+    gap: 20px;
+    margin-top: 50px;
+    margin-bottom: 50px;
   }
   
-  .checkpoints-list li::before {
-    content: '';
-    width: 10px;
-    height: 10px;
-    background-color: #f0abab;
-    border-radius: 50%;
-    position: absolute;
-    left: -20px; /* Adjust the position as necessary */
-    top: 50%;
-    transform: translateY(-50%);
+  .page-checkpoint-container .checkpoint-component {
+    margin-bottom: 10px; /* Adjust the value as needed */
   }
-  
   .add-checkpoint-button {
-    background-color: #ffffff;
-    border: none;
-    padding: 10px 20px;
-    margin-top: 20px;
+    color: #ffffff;
+    font-family: "Inter", Helvetica;
+    font-size: 24px;
+    font-weight: 400;
+    text-align: center;
+    position: relative;
+    width: 205px;
+    height: 49px;
+    background-color: #51585f; /* Background color for the button */
+    border-radius: 10px; /* Adjust the border radius as needed */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none; /* Remove the underline from links */
     cursor: pointer;
-    font-size: 18px;
   }
   

@@ -23,7 +23,6 @@
       <div className="add-checkpoint">
         <div className="div">
           <Header />
-          <div className="text-wrapper">IDCollege</div>
           <form>
             <div className="input-container">
               <input
@@ -32,7 +31,7 @@
                 onChange={(e) => setGoal(e.target.value)}
                 onKeyPress={handleKeyPress}
                 placeholder="Enter your goal"
-                className="rectangle"
+                className="input-rectangle"
                 
               />
               <Link to="/checkpoints" onClick={handleButtonClick}>

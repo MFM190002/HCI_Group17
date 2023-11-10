@@ -35,7 +35,7 @@
     top: 438px;
   }
   
-  .add-checkpoint .rectangle {
+  .add-checkpoint .input-rectangle {
     background-color: #ffffff;
     border-radius: 10px;
     height: 50px;
@@ -44,9 +44,9 @@
   
   .img {
     height: 60px;
-    left: 450px;
-    position: absolute;
-    top: 0px;
+    left: 310px;
+    position: relative;
+    bottom: 63px;
     width: 60px;
   }
   

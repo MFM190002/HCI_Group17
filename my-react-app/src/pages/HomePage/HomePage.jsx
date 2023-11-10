@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import "./HomePage.css";
 import { Link } from "react-router-dom";
 import ProgressComponent from "./ProgressComponent/ProgressComponent";
-import CheckpointComponent from "./CheckpointComponent/CheckpointComponent";
+import CheckpointComponent from "../../components/CheckpointComponent/CheckpointComponent";
 import Header from "../../components/Header/Header";
 function HomePage() {
   // Placeholder for dynamic progress percentage (you'll need to replace this with actual state logic)

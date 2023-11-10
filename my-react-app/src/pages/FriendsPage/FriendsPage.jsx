@@ -43,8 +43,10 @@ class FriendsPage extends Component {
     return (
       <div className="friends-page">
         <Header/>
-        <h1>My Friends</h1>
-        <div className="friends-list">{this.renderFriendsList()}</div>
+        <div className="friends-page-content">
+          <h2>My Friends</h2>
+          <div className="friends-list">{this.renderFriendsList()}</div>
+        </div>
       </div>
     );
   }
