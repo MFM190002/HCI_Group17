@@ -1,6 +1,9 @@
+// AddFriendPage.jsx
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './AddFriendPage.css';
 import Header from '../../components/Header/Header';
+
 function AddFriendPage() {
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -8,10 +11,10 @@ function AddFriendPage() {
     setSearchTerm(e.target.value);
   };
 
-  const handleSearch = () => {
-    // Implement the search functionality here
-    console.log('Search for:', searchTerm);
-  };
+  // const handleSearch = () => {
+  //   // Navigate to FriendConfirmationPage with the search term
+  //   console.log('Search for:', searchTerm);
+  // };
 
   return (
     <div className="add-friend-page">
@@ -25,9 +28,9 @@ function AddFriendPage() {
           onChange={handleSearchChange}
           className="search-input"
         />
-        <button onClick={handleSearch} className="search-button">
+        <Link to={`/friendsconfirmation`} className="search-button">
           🔍
-        </button>
+        </Link>
       </div>
     </div>
   );

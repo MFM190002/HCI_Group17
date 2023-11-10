@@ -1,55 +1,29 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+// FriendsPage.jsx
+import React from 'react';
+import "./FriendsPage.css"
 import FriendComponent from './FriendComponent/FriendComponent';
-import './FriendsPage.css';
+import { Link } from 'react-router-dom';
 import Header from '../../components/Header/Header';
 
-class FriendsPage extends Component {
-  constructor() {
-    super();
-    this.state = {
-      friends: [
-        { id: 1, name: 'Friend 1' },
-        { id: 2, name: 'Friend 2' },
-        { id: 3, name: 'Friend 3' },
-        // ...other friends
-      ],
-    };
-  }
+function FriendsPage({ friends }) {
+  const renderFriendsList = () => {
+    return friends.map((friend) => (
+      <FriendComponent key={friend.id} friend={friend} />
+    ));
+  };
 
-  renderFriendsList() {
-    // Map through friends and render the FriendComponent for each
-    const listItems = this.state.friends.map((friend, index, array) => {
-      // Check if the current friend is the last in the array
-      const isLastFriend = index === array.length - 1;
-
-      return (
-        <React.Fragment key={friend.id}>
-          <FriendComponent friend={friend} />
-          {/* If it's the last friend, render the "Add a Friend" button below */}
-          {isLastFriend && (
-            <Link to="/addfriends" className="add-friend-button">
-              Add a Friend
-            </Link>
-          )}
-        </React.Fragment>
-      );
-    });
-
-    return listItems;
-  }
-
-  render() {
-    return (
-      <div className="friends-page">
+  return (
+    <div className="friends-page">
         <Header/>
         <div className="friends-page-content">
           <h2>My Friends</h2>
-          <div className="friends-list">{this.renderFriendsList()}</div>
-        </div>
+          <div className="friends-list">{renderFriendsList()}</div>
+          <Link to="/addfriends" className="add-friend-button">
+            Add Friend
+          </Link>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default FriendsPage;

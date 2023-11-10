@@ -33,7 +33,7 @@
     background-color: #ffffff;
     padding: 20px;
     border-radius: 10px;
-    margin-top: 20px;
+    margin-top: 15%;
   }
   
   .friend-image {
@@ -46,12 +46,14 @@
   .friend-info {
     display: flex;
     align-items: center;
+    width: 400px;
+    height: 100px;
   }
   
   .friend-name {
     font-size: 24px;
     font-weight: bold;
-    margin-right: 20px;
+    margin-right: 10px;
   }
   
   .add-friend-button {
