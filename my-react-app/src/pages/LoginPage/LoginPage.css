@@ -84,3 +84,11 @@
   transform: translateX(-50%); /* Center the element */
   cursor: pointer; /* Make it appear clickable */
 }
+
+.error-message {
+  position: absolute;
+  top: 625px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: red; /* Set the color as needed */
+}
