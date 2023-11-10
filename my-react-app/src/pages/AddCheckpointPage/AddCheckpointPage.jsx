@@ -3,7 +3,7 @@
   import "./AddCheckpointPage.css";
   import { useNavigate } from "react-router-dom";
   import plus from "./icons8-plus-60.png"
-
+  import Header from "../../components/Header/Header";
   function AddCheckpointPage() {
     const [goal, setGoal] = useState("");
 
@@ -22,6 +22,7 @@
     return (
       <div className="add-checkpoint">
         <div className="div">
+          <Header />
           <div className="text-wrapper">IDCollege</div>
           <form>
             <div className="input-container">

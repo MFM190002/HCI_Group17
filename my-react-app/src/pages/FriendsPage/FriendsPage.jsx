@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import FriendComponent from './FriendComponent/FriendComponent';
 import './FriendsPage.css';
+import Header from '../../components/Header/Header';
 
 class FriendsPage extends Component {
   constructor() {
@@ -41,6 +42,7 @@ class FriendsPage extends Component {
   render() {
     return (
       <div className="friends-page">
+        <Header/>
         <h1>My Friends</h1>
         <div className="friends-list">{this.renderFriendsList()}</div>
       </div>

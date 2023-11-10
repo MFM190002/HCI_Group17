@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './AddFriendPage.css';
-
+import Header from '../../components/Header/Header';
 function AddFriendPage() {
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -15,11 +15,7 @@ function AddFriendPage() {
 
   return (
     <div className="add-friend-page">
-      <div className="header">
-        <button className="back-button">Back</button>
-        <div className="title">IDCollege</div>
-        <div className="subtitle">Add Friend</div>
-      </div>
+      <Header />
       
       <div className="search-section">
         <input

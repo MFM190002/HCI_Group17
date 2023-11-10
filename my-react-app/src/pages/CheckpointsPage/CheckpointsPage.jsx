@@ -2,15 +2,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './CheckpointsPage.css';
-
+import Header from '../../components/Header/Header';
 function CheckpointsPage() {
   return (
     <div className="checkpoints-page">
-      <div className="nav">
-        <button className="nav-button">Back</button>
-        <div className="title">IDCollege</div>
-        <Link to="/" className="nav-button">Home</Link>
-      </div>
+      <Header />
       
       <div className="progress-section">
         <div className="progress-title">Progress</div>
