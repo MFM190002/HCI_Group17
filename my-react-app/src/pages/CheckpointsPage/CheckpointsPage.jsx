@@ -4,9 +4,7 @@ import './CheckpointsPage.css';
 import Header from '../../components/Header/Header';
 import CheckpointComponent from '../../components/CheckpointComponent/CheckpointComponent';
 
-function CheckpointsPage() {
-  const checkpoints = ['Draft College Essay', 'Fill out FAFSA', 'Start UTD App'];
-
+function CheckpointsPage({ checkpoints }) {
   return (
     <div className="checkpoints-page">
       <Header />

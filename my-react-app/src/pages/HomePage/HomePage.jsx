@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import ProgressComponent from "./ProgressComponent/ProgressComponent";
 import CheckpointComponent from "../../components/CheckpointComponent/CheckpointComponent";
 import Header from "../../components/Header/Header";
-function HomePage() {
+function HomePage({ checkpoints }) {
   // Placeholder for dynamic progress percentage (you'll need to replace this with actual state logic)
   const [progress, setProgress] = useState(50);
     // You can update the progress state as needed, perhaps based on user interactions or data fetching
@@ -14,7 +14,6 @@ function HomePage() {
     // Example: Increment progress by 10%
     setProgress((prevProgress) => prevProgress + 10);
   };
-  const checkpoints = ["Research 5 Colleges", "Fill out FAFSA", "Create your resume"];
   return (
     <div className="friends-container">
       <div className="content">

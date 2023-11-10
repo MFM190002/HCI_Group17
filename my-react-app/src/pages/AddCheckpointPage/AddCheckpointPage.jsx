@@ -4,13 +4,14 @@
   import { useNavigate } from "react-router-dom";
   import plus from "./icons8-plus-60.png"
   import Header from "../../components/Header/Header";
-  function AddCheckpointPage() {
+  function AddCheckpointPage({ addCheckpoint }) {
     const [goal, setGoal] = useState("");
 
     const navigate = useNavigate()
 
     const handleButtonClick = () => {
-      navigate("/home");
+      addCheckpoint(goal); // Add the new checkpoint
+      navigate("/checkpoints");
     };
 
     const handleKeyPress = (e) => {
@@ -34,7 +35,7 @@
                 className="input-rectangle"
                 
               />
-              <Link to="/checkpoints" onClick={handleButtonClick}>
+              <Link to={{ pathname: "/checkpoints", state: { goal } }} onClick={handleButtonClick}>
                 <img className="img" alt="plus" src={plus} />
               </Link>
             </div>
