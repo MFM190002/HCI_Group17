@@ -23,8 +23,8 @@ h1 {
     gap: 10px;
   }
   
-  .add-friend-button {
-    color: #000000;
+  .add-friend-button-1 {
+    color: white;
     font-family: "Inter", Helvetica;
     font-size: 24px;
     font-weight: 400;
@@ -39,10 +39,23 @@ h1 {
     justify-content: center;
     text-decoration: none; /* Remove the underline from links */
     cursor: pointer;
+    position: relative;
   }
   
-  .add-friend-button:hover {
+  .add-friend-button-1:hover {
     background-color: #8a96a3; /* Lighter blue for hover effect */
+  }
+
+  .friends-page-content {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .add-friend-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   

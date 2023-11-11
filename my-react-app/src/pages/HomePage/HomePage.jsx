@@ -26,7 +26,7 @@ function HomePage({ checkpoints, friends }) {
         <div className="home-content-container">
           <div className="home-friends-list">
             <div className="friends-leaderboard">Friends Leaderboard</div>
-              {friends.map((friend) => (
+              {friends.slice(0,3).map((friend) => (
                 <FriendComponent key={friend.id} friend={friend} />
               ))}
             <Link to="/friends" className="view-friends-link">
@@ -37,7 +37,7 @@ function HomePage({ checkpoints, friends }) {
           <div className="checkpoints-list">
             <div className="upcoming-checkpoints">Your Upcoming Checkpoints</div>
             <div className="checkpoint-container">
-              {checkpoints.map((checkpoint, index) => (
+              {checkpoints.slice(0,3).map((checkpoint, index) => (
                 <CheckpointComponent key={index} checkpoint={checkpoint} />
               ))}
             </div>

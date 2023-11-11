@@ -18,9 +18,11 @@ function FriendsPage({ friends }) {
         <div className="friends-page-content">
           <h2>My Friends</h2>
           <div className="friends-list">{renderFriendsList()}</div>
-          <Link to="/addfriends" className="add-friend-button">
-            Add Friend
-          </Link>
+          <div className='add-friend-button-container'>
+            <Link to="/addfriends" className="add-friend-button-1">
+              Add Friend
+            </Link>
+          </div>
       </div>
     </div>
   );
