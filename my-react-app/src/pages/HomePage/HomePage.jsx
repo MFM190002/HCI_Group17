@@ -44,8 +44,8 @@ function HomePage({ checkpoints, friends }) {
           <div className="checkpoints-list">
             <div className="upcoming-checkpoints">Your Upcoming Checkpoints</div>
             <div className="checkpoint-container">
-              {checkpoints.map((checkpoint, index) => (
-                <CheckpointComponent key={index} checkpoint={checkpoint} />
+              {remainingCheckpoints.map((checkpoint, index) => (
+                <CheckpointComponent key={index} checkpoint={checkpoint} onCheckClick={handleCheckpointClick}/>
               ))}
             </div>
             <Link to="/checkpoints" className="view-checkpoints-link">
