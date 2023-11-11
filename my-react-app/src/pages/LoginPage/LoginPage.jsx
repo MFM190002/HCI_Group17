@@ -28,7 +28,7 @@ function LoginPage() {
       }
 
       // If the response is successful, navigate to /home
-      navigate("/home");
+      navigate(`/home?username=${username}`);
     } catch (error) {
       // If an error occurs, handle it and set the error state
       console.error("Authentication error:", error);

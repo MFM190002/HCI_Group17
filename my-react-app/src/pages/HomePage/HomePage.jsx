@@ -10,6 +10,8 @@ import FriendComponent from "../FriendsPage/FriendComponent/FriendComponent";
 function HomePage({ checkpoints, friends }) {
   const [progress, setProgress] = useState(0);
   const [completedCheckpoints, setCompletedCheckpoints] = useState([]);
+  const findUsername = new URLSearchParams(window.location.search);
+  const username = findUsername.get('username');
 
   const handleCheckpointClick = (clickedCheckpoint) => {
     setCompletedCheckpoints((prevCompletedCheckpoints) => [
@@ -36,7 +38,7 @@ function HomePage({ checkpoints, friends }) {
               {friends.slice(0,3).map((friend) => (
                 <FriendComponent key={friend.id} friend={friend} />
               ))}
-            <Link to="/friends" className="view-friends-link">
+            <Link to={`/friends?username=${username}`} className="view-friends-link">
               View Friends
             </Link>
           </div>

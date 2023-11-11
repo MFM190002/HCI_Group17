@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException, Form
+from fastapi import FastAPI, HTTPException, Form, Query
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -64,3 +64,17 @@ async def check_friend(username: str = Form(...), friend_name: str = Form(...)):
     # Friend found
     return {"friend_exists": True}
 
+@app.get("/get_friends_list")
+async def get_friends_list(username: str = Query(...)):
+    if username not in dummy_users:
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid username",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    friends = dummy_users[username]["friends"]
+
+    # Creating a list of dictionaries with unique keys for each friend
+    friends_with_keys = [{"id": idx + 1, "name": friend} for idx, friend in enumerate(friends)]
+
+    return {"friends": friends_with_keys}
