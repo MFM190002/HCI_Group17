@@ -27,6 +27,7 @@ function FriendsPage() {
       }
 
       const data = await response.json();
+      console.log(data.friends);
       setFriends(data.friends);
     } catch (error) {
       console.error("Error fetching friends list:", error);
@@ -35,7 +36,7 @@ function FriendsPage() {
 
   const renderFriendsList = () => {
     return friends.map((friend) => (
-      <FriendComponent key={friend.id} friend={friend} />
+      <FriendComponent key={friend.id} friend={friend.name} />
     ));
   };
 

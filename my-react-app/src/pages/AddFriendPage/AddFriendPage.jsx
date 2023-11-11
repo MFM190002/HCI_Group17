@@ -1,15 +1,17 @@
-// AddFriendPage.jsx
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './AddFriendPage.css';
 import Header from '../../components/Header/Header';
 import { useNavigate } from 'react-router-dom';
+import FriendComponent from '../FriendsPage/FriendComponent/FriendComponent';
 
 function AddFriendPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [friendExists, setFriendExists] = useState(false);
   const navigate = useNavigate();
-
+  const [userDetails, setUserDetails] = useState({ name: "", progress: "" });
+  const findUsername = new URLSearchParams(window.location.search);
+  const username = findUsername.get('username');
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
   };
@@ -30,16 +32,19 @@ function AddFriendPage() {
       if (!response.ok) {
         throw new Error("Friend not found");
       }
-
+      // Parse the response JSON
+      const { userName, progress } = await response.json();
       setFriendExists(true);
-
-      // Navigate to FriendConfirmationPage with the search term
-      // Use the actual path of FriendConfirmationPage
-      navigate(`/friendsconfirmation/${searchTerm}`);
+      setUserDetails({ name: userName, progress: progress });
     } catch (error) {
       console.error("Friend not found:", error);
       setFriendExists(false);
     }
+  };
+
+  const handleConfirmAddFriend = () => {
+    // Perform any additional actions before navigating to the friends endpoint
+    navigate(`/friends?username=${username}`);
   };
 
   return (
@@ -60,6 +65,15 @@ function AddFriendPage() {
           🔍
         </button>
       </div>
+      {friendExists && (
+        <div>
+          {/* Render FriendComponent here */}
+          <FriendComponent friend={userDetails} />
+          <button onClick={handleConfirmAddFriend}>
+            Confirm Add Friend
+          </button>
+        </div>
+      )}
     </div>
   );
 }

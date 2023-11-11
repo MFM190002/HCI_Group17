@@ -6,7 +6,7 @@ const FriendComponent = ({ friend }) => {
     <div className="friend">
       <div className="friend-info-component">
         <span className="friend-name">{friend.name}</span>
-        <span className="friend-id">ID: {friend.id}</span>
+        <span className="friend-id">Progress: {friend.progress}</span>
       </div>
     </div>
   );

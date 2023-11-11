@@ -19,9 +19,9 @@ function App() {
   };
 
   const [friends, setFriends] = React.useState([
-    { id: 1, name: 'Friend 1' },
-    { id: 2, name: 'Friend 2' },
-    { id: 3, name: 'Friend 3' },
+    { progress: 1, name: 'Friend 1' },
+    { progress: 2, name: 'Friend 2' },
+    { progress: 3, name: 'Friend 3' },
     // ...other friends
   ]);
 
