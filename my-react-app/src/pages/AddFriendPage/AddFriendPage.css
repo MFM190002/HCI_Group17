@@ -60,4 +60,10 @@
     font-size: 24px;
     cursor: pointer;
   }
+
+  .add-friend-title {
+    font-weight: bold;
+    font-size: 36px;
+    padding: 50px;
+  }
   

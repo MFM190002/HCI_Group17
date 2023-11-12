@@ -9,7 +9,6 @@ function FriendsPage() {
   const [friends, setFriends] = useState([]);
   const queryParams = new URLSearchParams(window.location.search);
   const username = queryParams.get('username')
-  console.log(username)
   useEffect(() => {
     // Fetch friends list from the backend when the component mounts
     fetchFriendsList(username);
@@ -42,12 +41,12 @@ function FriendsPage() {
 
   return (
     <div className="friends-page">
-      <Header />
+      <Header username={username} />
       <div className="friends-page-content">
         <h2>My Friends</h2>
         <div className="friends-list">{renderFriendsList()}</div>
         <div className='add-friend-button-container'>
-          <Link to="/addfriends" className="add-friend-button-1">
+          <Link to={`/addfriends?username=${username}`} className="add-friend-button-1">
             Add Friend
           </Link>
         </div>

@@ -7,7 +7,6 @@ import LoginPage from './pages/LoginPage/LoginPage';
 import SignupPage from './pages/SignupPage/SignupPage';
 import FriendsPage from './pages/FriendsPage/FriendsPage';
 import AddFriendPage from './pages/AddFriendPage/AddFriendPage';
-import FriendConfirmationPage from './pages/FriendConfirmationPage/FriendConfirmationPage';
 import AddCheckpointPage from './pages/AddCheckpointPage/AddCheckpointPage';
 import CheckpointsPage from './pages/CheckpointsPage/CheckpointsPage';
 function App() {
@@ -36,22 +35,21 @@ function App() {
         <Routes>
           <Route
             path="/home"
-            element={<HomePage checkpoints={checkpoints} friends={friends} />}
+            element={<HomePage checkpoints={checkpoints} />}
           />
           <Route path="/journey" element={<JourneyPage />} />
           <Route path="/" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route
             path="/friends"
-            element={<FriendsPage friends={friends} />}
+            element={<FriendsPage />}
           />
-          <Route path="/friendsconfirmation" element={<FriendConfirmationPage addFriend={addFriend}/>} />
           <Route
             path="/checkpoints"
-            element={<CheckpointsPage checkpoints={checkpoints} />}
+            element={<CheckpointsPage />}
           />
           <Route
-            path="/addcheckpoint"
+            path="/add_checkpoint"
             element={<AddCheckpointPage addCheckpoint={addCheckpoint} />}
           />
           <Route path="/addfriends" element={<AddFriendPage />} />

@@ -3,8 +3,7 @@
 .home-progress-section {
     height: 101px;
     position: absolute;
-    top: 251px;
-    left: 113px;
+
   }
   
   .progress-label {
@@ -28,6 +27,10 @@
     left: 306px;
     width: 751px;
     overflow: hidden;
+  }
+
+  .checkpoints-progress {
+    position: relative;
   }
   
   .home-progress-bar {

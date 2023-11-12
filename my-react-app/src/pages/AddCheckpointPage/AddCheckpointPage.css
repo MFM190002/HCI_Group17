@@ -8,21 +8,11 @@
   
   .add-checkpoint .div {
     background-color: #a9d1f6;
-    height: 1037px;
-    width: 1452px;
+    height: 100%;
+    width: 100%;
     position: relative;
   }
-  
-  .add-checkpoint .text-wrapper {
-    color: #000000;
-    font-family: "Inter", Helvetica;
-    font-size: 64px;
-    position: absolute;
-    text-align: center;
-    left: 50%;
-    top: 230px;
-    transform: translateX(-50%);
-  }
+
   
   .add-checkpoint .input-container {
     position: absolute;
@@ -48,6 +38,12 @@
     position: relative;
     bottom: 63px;
     width: 60px;
+  }
+
+  .checkpoint-add-label {
+    font-size: 36px;
+    font-weight: bold;
+    position: relative;
   }
   
   

@@ -10,8 +10,11 @@ export const JourneyPage = () => {
   const [selectedGoal, setSelectedGoal] = useState("");
   const [customGoal, setCustomGoal] = useState(""); // State to store the custom goal
 
+  const queryParams = new URLSearchParams(window.location.search);
+  const username = queryParams.get('username')
+
   const handleButtonClick = () => {
-    navigate("/home");
+    navigate(`/home?username=${username}`);
   };
 
   const handleInputKeyPress = (event) => {
@@ -20,7 +23,7 @@ export const JourneyPage = () => {
       if (isCustomGoal && customGoal) {
         console.log("Custom goal set:", customGoal); // Replace with goal processing logic
       }
-      navigate("/home");
+      navigate(`/home?username=${username}`);
     }
   };
 
@@ -66,7 +69,7 @@ export const JourneyPage = () => {
                 onKeyPress={handleInputKeyPress}
               />
             )}
-            <Link to="/home" onClick={handleButtonClick}>
+            <Link to={`/home?username=${username}`} onClick={handleButtonClick}>
               <img className="img" alt="Submit" src={submit} />
             </Link>
           </div>

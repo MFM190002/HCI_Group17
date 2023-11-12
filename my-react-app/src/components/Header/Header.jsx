@@ -2,12 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css'; // Make sure to import your CSS file
 
-const Header = () => {
+const Header = ({ username }) => {
   return (
     <div className="header-container">
       <div className="home-button">
         <div className="rectangle">
-          <Link to="/home" className="home-link">
+          <Link to={`/home?username=${username}`} className="home-link">
             Home
           </Link>
         </div>

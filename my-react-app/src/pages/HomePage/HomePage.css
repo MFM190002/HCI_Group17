@@ -101,3 +101,9 @@
 .checkpoints-list {
   height: 100%;
 }
+
+.home-progress-container {
+  position: absolute;
+  top: 251px;
+  left: 113px;
+}

@@ -30,7 +30,7 @@ function SignupPage() {
       console.log("Username:", username);
       console.log("Password:", password);
       console.log("Confirm Password:", confirmPassword);
-      navigate('/journey');
+      navigate(`/journey?username=${username}`);
     }
   };
 

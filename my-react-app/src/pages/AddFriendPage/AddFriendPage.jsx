@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import './AddFriendPage.css';
 import Header from '../../components/Header/Header';
 import { useNavigate } from 'react-router-dom';
@@ -49,7 +48,7 @@ function AddFriendPage() {
 
   return (
     <div className="add-friend-page">
-      <Header />
+      <Header username={username} />
       <div className="add-friend-title">
         Add a friend
       </div>
