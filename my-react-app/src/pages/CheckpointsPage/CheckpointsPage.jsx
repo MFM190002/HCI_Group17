@@ -14,8 +14,24 @@ function CheckpointsPage() {
   const username = queryParams.get('username');
   
   useEffect(() => {
-    // Fetch checkpoints from the backend when the component mounts
-    fetchCheckpoints(username);
+    const fetchCheckpoints = async () => {
+      try {
+        const response = await fetch(`http://127.0.0.1:8000/get_checkpoints?username=${username}`, {
+          method: "GET",
+          credentials: 'include',
+        });
+  
+        if (!response.ok) {
+          throw new Error("Failed to fetch checkpoints");
+        }
+  
+        const data = await response.json();
+        setCheckpoints(data.checkpoints);
+      } catch (error) {
+        console.error("Error fetching checkpoints:", error);
+      }
+    };
+    fetchCheckpoints();
 
     const storedCompletedCheckpoints = localStorage.getItem('completedCheckpoints');
     if (storedCompletedCheckpoints) {
