@@ -8,6 +8,7 @@ app = FastAPI()
 origins = [
     "http://localhost:3000",  # Add your frontend's URL here
     "http://localhost:3001",  # Add more origins if needed
+    "https://verdant-flan-0f6f3e.netlify.app",
 ]
 
 app.add_middleware(
