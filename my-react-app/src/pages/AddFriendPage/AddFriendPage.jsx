@@ -68,7 +68,7 @@ function AddFriendPage() {
         <div>
           {/* Render FriendComponent here */}
           <FriendComponent friend={userDetails} />
-          <button onClick={handleConfirmAddFriend}>
+          <button onClick={handleConfirmAddFriend} className="confirm-add-friend">
             Confirm Add Friend
           </button>
         </div>

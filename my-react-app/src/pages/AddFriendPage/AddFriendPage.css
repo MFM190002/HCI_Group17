@@ -66,4 +66,24 @@
     font-size: 36px;
     padding: 50px;
   }
+
+  .confirm-add-friend {
+    color: #ffffff;
+    font-family: "Inter", Helvetica;
+    font-size: 24px;
+    font-weight: 400;
+    text-align: center;
+    position: relative;
+    width: 205px;
+    height: 60px;
+    margin-left: 20px;
+    background-color: #51585f; /* Background color for the button */
+    border-radius: 10px; /* Adjust the border radius as needed */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none; /* Remove the underline from links */
+    cursor: pointer;
+    padding: 10px 10px 10px 10px;
+  }
   
