@@ -6,8 +6,7 @@ import CheckpointComponent from "../../components/CheckpointComponent/Checkpoint
 import Header from "../../components/Header/Header";
 import FriendComponent from "../FriendsPage/FriendComponent/FriendComponent";
 
-function HomePage({ checkpoints }) {
-  const [progress, setProgress] = useState(0);
+function HomePage() {
   const [completedCheckpoints, setCompletedCheckpoints] = useState([]);
   const [friends, setFriends] = useState([]);
   const [userCheckpoints, setUserCheckpoints] = useState([]);
@@ -62,21 +61,23 @@ function HomePage({ checkpoints }) {
     }
   };
 
-  const renderFriendsList = () => {
-    return friends.slice(0,3).map((friend) => (
-      <FriendComponent key={friend.id} friend={friend.name} />
-    ));
-  };
-
   const handleCheckpointClick = (clickedCheckpoint) => {
     const updatedCompletedCheckpoints = [
       ...completedCheckpoints,
       clickedCheckpoint,
     ];
     setCompletedCheckpoints(updatedCompletedCheckpoints);
-    setProgress((prevProgress) => (prevProgress + 10 <= 100 ? prevProgress + 10 : prevProgress));
+
+    const progressPercentage = (updatedCompletedCheckpoints.length / userCheckpoints.length) * 100;
 
     localStorage.setItem('completedCheckpoints', JSON.stringify(updatedCompletedCheckpoints));
+    localStorage.setItem('progress', progressPercentage);
+  };
+
+  const renderFriendsList = () => {
+    return friends.slice(0, 3).map((friend) => (
+      <FriendComponent key={friend.id} friend={friend.name} />
+    ));
   };
 
   // Filter out completed checkpoints from the list
@@ -91,12 +92,13 @@ function HomePage({ checkpoints }) {
       <CheckpointComponent key={index} checkpoint={checkpoint} onCheckClick={handleCheckpointClick} />
     ));
   };
+
   return (
     <div className="friends-container">
       <div className="content">
         <Header username={username} />
         <div className="home-progress-container">
-          <ProgressComponent progressPercentage={progress} />
+          <ProgressComponent />
         </div>
 
         <div className="home-content-container">
