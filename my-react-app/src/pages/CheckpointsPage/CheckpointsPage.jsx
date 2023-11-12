@@ -16,6 +16,11 @@ function CheckpointsPage() {
   useEffect(() => {
     // Fetch checkpoints from the backend when the component mounts
     fetchCheckpoints(username);
+
+    const storedCompletedCheckpoints = localStorage.getItem('completedCheckpoints');
+    if (storedCompletedCheckpoints) {
+      setCompletedCheckpoints(JSON.parse(storedCompletedCheckpoints));
+    }
   }, [username]);
   
 
@@ -37,13 +42,40 @@ function CheckpointsPage() {
     }
   };
 
-  const handleCheckpointClick = (clickedCheckpoint) => {
-    setCompletedCheckpoints((prevCompletedCheckpoints) => [
-      ...prevCompletedCheckpoints,
-      clickedCheckpoint,
-    ]);
-    setProgress((prevProgress) => (prevProgress + 10 <= 100 ? prevProgress + 10 : prevProgress));
+  const handleCheckpointClick = async (clickedCheckpoint) => {
+    try {
+      // Update local state
+      const updatedCompletedCheckpoints = [...completedCheckpoints, clickedCheckpoint];
+      setCompletedCheckpoints(updatedCompletedCheckpoints);
+      setProgress((prevProgress) => (prevProgress + 10 <= 100 ? prevProgress + 10 : prevProgress));
+  
+      // Save completed checkpoints to localStorage
+      localStorage.setItem('completedCheckpoints', JSON.stringify(updatedCompletedCheckpoints));
+  
+      // Update the backend with the completed checkpoint
+      const response = await fetch(`http://127.0.0.1:8000/complete_checkpoint`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({
+          username: username,
+          checkpoint: clickedCheckpoint,
+        }),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to complete checkpoint on the server');
+      }
+  
+      // Fetch updated checkpoints after completion
+      fetchCheckpoints(username);
+    } catch (error) {
+      console.error('Error completing checkpoint:', error);
+    }
   };
+  
 
   // Filter out completed checkpoints from the list
   const remainingCheckpoints = checkpoints.filter(

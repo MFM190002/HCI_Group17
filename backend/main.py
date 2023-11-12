@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException, Form, Query
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
+from typing import Dict
 
 app = FastAPI()
 
@@ -136,6 +137,38 @@ async def add_checkpoint(username: str = Form(...), new_checkpoint: str = Form(.
 @app.post("/complete_checkpoint")
 async def complete_checkpoint(username: str = Form(...), checkpoint: str = Form(...)):
     try:
+        # Check if the username exists in the dummy data
+        if username not in dummy_users:
+            raise HTTPException(
+                status_code=401,
+                detail="Invalid username",
+                headers={"WWW-Authenticate": "Bearer"},
+            )
+
+        # Check if the provided checkpoint exists in the user's checkpoints array
+        if checkpoint not in dummy_users[username]["checkpoints"]:
+            raise HTTPException(
+                status_code=404,
+                detail="Checkpoint not found",
+            )
+
+        # Remove the checkpoint from the user's checkpoints array
+        dummy_users[username]["checkpoints"].remove(checkpoint)
+
+        # Return success response
+        return {"message": "Checkpoint completed successfully"}
+
+    except Exception as e:
+        # Handle any other exceptions
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/complete_checkpoint")
+async def complete_checkpoint(data: Dict[str, str]):
+    try:
+        # Extract username and checkpoint from the request data
+        username = data.get("username")
+        checkpoint = data.get("checkpoint")
+
         # Check if the username exists in the dummy data
         if username not in dummy_users:
             raise HTTPException(

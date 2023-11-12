@@ -19,6 +19,11 @@ function HomePage({ checkpoints }) {
     // Fetch friends list and user checkpoints from the backend when the component mounts
     fetchFriendsList(username);
     fetchUserCheckpoints(username);
+
+    const storedCompletedCheckpoints = localStorage.getItem('completedCheckpoints');
+    if (storedCompletedCheckpoints) {
+      setCompletedCheckpoints(JSON.parse(storedCompletedCheckpoints));
+    }
   }, [username]);
 
   const fetchFriendsList = async (username) => {
@@ -64,11 +69,14 @@ function HomePage({ checkpoints }) {
   };
 
   const handleCheckpointClick = (clickedCheckpoint) => {
-    setCompletedCheckpoints((prevCompletedCheckpoints) => [
-      ...prevCompletedCheckpoints,
+    const updatedCompletedCheckpoints = [
+      ...completedCheckpoints,
       clickedCheckpoint,
-    ]);
+    ];
+    setCompletedCheckpoints(updatedCompletedCheckpoints);
     setProgress((prevProgress) => (prevProgress + 10 <= 100 ? prevProgress + 10 : prevProgress));
+
+    localStorage.setItem('completedCheckpoints', JSON.stringify(updatedCompletedCheckpoints));
   };
 
   // Filter out completed checkpoints from the list
