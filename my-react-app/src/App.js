@@ -17,17 +17,6 @@ function App() {
     setCheckpoints((prevCheckpoints) => [...prevCheckpoints, newCheckpoint]);
   };
 
-  const [friends, setFriends] = React.useState([
-    { progress: 1, name: 'Friend 1' },
-    { progress: 2, name: 'Friend 2' },
-    { progress: 3, name: 'Friend 3' },
-    // ...other friends
-  ]);
-
-  // Function to add a new friend to the list
-  const addFriend = (newFriend) => {
-    setFriends((prevFriends) => [...prevFriends, newFriend]);
-  };
 
   return (
     <div className="App">

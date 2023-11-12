@@ -9,7 +9,6 @@ function CheckpointsPage() {
   const [progress, setProgress] = useState(0);
   const [completedCheckpoints, setCompletedCheckpoints] = useState([]);
   const [checkpoints, setCheckpoints] = useState([]);
-  const [userCheckpoints, setUserCheckpoints] = useState([]);
 
   const queryParams = new URLSearchParams(window.location.search);
   const username = queryParams.get('username');
@@ -18,6 +17,7 @@ function CheckpointsPage() {
     // Fetch checkpoints from the backend when the component mounts
     fetchCheckpoints(username);
   }, [username]);
+  
 
   const fetchCheckpoints = async () => {
     try {
@@ -58,8 +58,6 @@ function CheckpointsPage() {
     ));
   };
 
-  // Display only the first three checkpoints
-  const displayedCheckpoints = checkpoints;
 
   return (
     <div className="checkpoints-page-1">
