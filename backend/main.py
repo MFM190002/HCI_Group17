@@ -53,7 +53,9 @@ dummy_users = {
         "checkpoints" : college_checkpoints
     },
     "alice_smith": {"password": "password123", "friends": ["John", "Bob"]},
-    "Manav": {"progress": "20%"}
+    "Manav": {"progress": "20%"},
+    "Alice" : {"progress" : "30%"},
+    "Justin" : {"progress": "25%"}
 }
 
 class SignupRequest(BaseModel):

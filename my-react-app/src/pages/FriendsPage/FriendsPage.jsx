@@ -16,7 +16,7 @@ function FriendsPage() {
 
   const fetchFriendsList = async (username) => {
     try {
-      const response = await fetch(`https://fastapi-hci-project-e870697179dd.herokuapp.com/get_friends_list?username=${username}`, {
+      const response = await fetch(`http://127.0.0.1:8000/get_friends_list?username=${username}`, {
         method: "GET",
         credentials:'include',
       });

@@ -15,7 +15,7 @@ function CheckpointsPage() {
   useEffect(() => {
     const fetchCheckpoints = async () => {
       try {
-        const response = await fetch(`https://fastapi-hci-project-e870697179dd.herokuapp.com/get_checkpoints?username=${username}`, {
+        const response = await fetch(`http://127.0.0.1:8000/get_checkpoints?username=${username}`, {
           method: "GET",
           credentials: 'include',
         });
@@ -40,7 +40,7 @@ function CheckpointsPage() {
 
   const fetchCheckpoints = async () => {
     try {
-      const response = await fetch(`https://fastapi-hci-project-e870697179dd.herokuapp.com/get_checkpoints?username=${username}`, {
+      const response = await fetch(`http://127.0.0.1:8000/get_checkpoints?username=${username}`, {
         method: 'GET',
         credentials: 'include',
       });
@@ -70,7 +70,7 @@ function CheckpointsPage() {
       localStorage.setItem('progress', progressPercentage);
 
       // Update the backend with the completed checkpoint
-      const response = await fetch(`https://fastapi-hci-project-e870697179dd.herokuapp.com/complete_checkpoint`, {
+      const response = await fetch(`http://127.0.0.1:8000/complete_checkpoint`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
