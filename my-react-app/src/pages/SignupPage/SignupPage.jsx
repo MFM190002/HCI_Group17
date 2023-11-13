@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./SignupPage.css";
-//import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 function SignupPage() {
@@ -9,7 +8,7 @@ function SignupPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [passwordError, setPasswordError] = useState(""); // New state for password error
+  const [passwordError, setPasswordError] = useState("");
   const navigate = useNavigate();
 
   const handlePasswordChange = (e) => {
@@ -20,17 +19,35 @@ function SignupPage() {
     setConfirmPassword(e.target.value);
   };
 
-  const handleSignup = () => {
+  const handleSignup = async () => {
     if (password !== confirmPassword) {
       setPasswordError("Passwords do not match");
     } else {
-      setPasswordError(""); // Clear the error if passwords match
-      console.log("First Name:", firstName);
-      console.log("Last Name:", lastName);
-      console.log("Username:", username);
-      console.log("Password:", password);
-      console.log("Confirm Password:", confirmPassword);
-      navigate(`/journey?username=${username}`);
+      setPasswordError(""); 
+
+      try {
+        const response = await fetch("https://fastapi-hci-project-e870697179dd.herokuapp.com/signup", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            firstName,
+            lastName,
+            username,
+            password,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error("Signup failed");
+        }
+
+        console.log("Signup successful");
+        navigate(`/journey?username=${username}`);
+      } catch (error) {
+        console.error("Error during signup:", error);
+      }
     }
   };
 
@@ -84,7 +101,7 @@ function SignupPage() {
           />
           {passwordError && <p className="password-error">{passwordError}</p>}
         </div>
-        <div className="signuppage-button" onClick = {handleSignup}>
+        <div className="signuppage-button" onClick={handleSignup}>
           <div className="signup-rectangle" />
           <div className="signup-button-text">Sign Up</div>
         </div>

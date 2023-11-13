@@ -2,6 +2,7 @@ from fastapi import FastAPI, HTTPException, Form, Query
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from typing import Dict
+from pydantic import BaseModel
 
 app = FastAPI()
 
@@ -54,6 +55,30 @@ dummy_users = {
     "alice_smith": {"password": "password123", "friends": ["John", "Bob"]},
     "Manav": {"progress": "20%"}
 }
+
+class SignupRequest(BaseModel):
+    username: str
+    password: str
+
+@app.post("/signup")
+async def signup(request: SignupRequest):
+    username = request.username
+    password = request.password
+
+    if username in dummy_users:
+        raise HTTPException(
+            status_code=400,
+            detail="Username already exists",
+        )
+
+    dummy_users[username] = {
+        "password": password,
+        "friends": [],
+        "checkpoints": college_checkpoints,
+    }
+
+    return JSONResponse(content={"message": "Signup successful"}, status_code=200)
+
 
 @app.post("/login")
 async def login(username: str = Form(...), password: str = Form(...)):
