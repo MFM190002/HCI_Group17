@@ -109,12 +109,16 @@ function CheckpointsPage() {
   return (
     <div className="checkpoints-page-1">
       <Header username={username} />
-      <div className="content-container">
-        <div className="checkpoints-progress">
+      <div className="checkpoints-progress">
           <ProgressComponent />
-        </div>
+      </div>
+      <div className="content-container">
+        
 
         <div className="page-checkpoints-list">
+          <div className="checkpoints-title" >
+            Your Upcoming Checkpoints
+          </div>
           <div className="page-checkpoint-container">{renderCheckpoints()}</div>
         </div>
 
