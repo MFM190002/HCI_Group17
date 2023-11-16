@@ -19,17 +19,7 @@
     line-height: normal;
     text-align: center;
   }
-
-  .check-button {
-    background-color: #00cc00; /* Green color */
-    color: #ffffff;
-    font-size: 24px; /* Adjust the font size to make it bigger */
-    border: none;
-    border-radius: 5px;
-    margin-left: 10px; /* Add some spacing between the text and button */
-    cursor: pointer;
-  }
-  
+    
   .home-checkpoint:hover .home-checkpoint-icon {
     background-color: #37ff00; /* Darker green on hover */
   }
