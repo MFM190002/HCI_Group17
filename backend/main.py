@@ -55,7 +55,14 @@ dummy_users = {
     "alice_smith": {"password": "password123", "friends": ["John", "Bob"]},
     "Manav": {"progress": "20%"},
     "Alice" : {"progress" : "30%"},
-    "Justin" : {"progress": "25%"}
+    "Justin" : {"progress": "25%"},
+    "justindoan" : {
+        "password": "password",
+        "friends" : [
+
+        ],
+        "checkpoints" : college_checkpoints
+    }
 }
 
 class SignupRequest(BaseModel):
@@ -113,10 +120,13 @@ async def check_friend(username: str = Form(...), friend_name: str = Form(...)):
             headers={"WWW-Authenticate": "Bearer"},
         )
 
-    dummy_users[username]["friends"].append({
+    friends_list = dummy_users[username]["friends"]
+    friends_list.append({
         "name": friend_name,
         "progress": dummy_users[friend_name]["progress"],
     })
+    print(friends_list)
+    dummy_users[username]["friends"] = friends_list
     # Friend found
     return {"userName": friend_name, "progress": dummy_users[friend_name]["progress"]}
 
