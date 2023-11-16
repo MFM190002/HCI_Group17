@@ -62,14 +62,23 @@ function HomePage() {
   };
 
   const handleCheckpointClick = (clickedCheckpoint) => {
-    const updatedCompletedCheckpoints = [
-      ...completedCheckpoints,
-      clickedCheckpoint,
-    ];
+    // Display confirmation pop-up
+    const isConfirmed = window.confirm(`You are completing this checkpoint:
+    ${clickedCheckpoint}.
+    Confirm?`);
+    
+    if (!isConfirmed) {
+      return; // Do nothing if the user cancels the confirmation
+    }
+
+    // Update local state
+    const updatedCompletedCheckpoints = [...completedCheckpoints, clickedCheckpoint];
     setCompletedCheckpoints(updatedCompletedCheckpoints);
 
+    // Calculate progress percentage
     const progressPercentage = (updatedCompletedCheckpoints.length / userCheckpoints.length) * 100;
 
+    // Set progress and completed checkpoints to localStorage
     localStorage.setItem('completedCheckpoints', JSON.stringify(updatedCompletedCheckpoints));
     localStorage.setItem('progress', progressPercentage);
   };

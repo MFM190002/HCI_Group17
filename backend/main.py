@@ -52,7 +52,23 @@ dummy_users = {
     "test_new_user" : {
         "checkpoints" : college_checkpoints
     },
-    "alice_smith": {"password": "password123", "friends": ["John", "Bob"]},
+    "alice_smith": {
+        "password": "password123",
+        "friends": [
+            {
+                "name": 'Jim',
+                "progress": '20%'
+            },
+            {
+                "name": 'Bob',
+                "progress": '10%'
+            }
+        ],
+        "checkpoints": college_checkpoints
+    },
+    "test_new_user" : {
+        "checkpoints" : college_checkpoints
+    },
     "Manav": {"progress": "20%"},
     "Alice" : {"progress" : "30%"},
     "Justin" : {"progress": "25%"},

@@ -57,6 +57,15 @@ function CheckpointsPage() {
   };
 
   const handleCheckpointClick = async (clickedCheckpoint) => {
+    // Display confirmation pop-up
+    const isConfirmed = window.confirm(`You are completing this checkpoint: 
+    ${clickedCheckpoint}. 
+    Confirm?`);
+    
+    if (!isConfirmed) {
+      return; // Do nothing if the user cancels the confirmation
+    }
+
     try {
       // Update local state
       const updatedCompletedCheckpoints = [...completedCheckpoints, clickedCheckpoint];
