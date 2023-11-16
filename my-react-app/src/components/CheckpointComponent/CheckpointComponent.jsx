@@ -7,13 +7,11 @@ const CheckpointComponent = ({ checkpoint, onCheckClick }) => {
     <div className="home-checkpoint">
       <div
         className="home-checkpoint-icon"
+        onClick={() => onCheckClick(checkpoint)}
         style={{ cursor: 'pointer' }}
       ></div>
       <div className="home-checkpoint-text">
         {checkpoint}
-        <button className="check-button" onClick={() => onCheckClick(checkpoint)}>
-          ✓
-        </button>
       </div>
     </div>
   );
