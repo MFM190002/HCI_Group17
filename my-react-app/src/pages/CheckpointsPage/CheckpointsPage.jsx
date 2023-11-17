@@ -5,6 +5,19 @@ import Header from '../../components/Header/Header';
 import CheckpointComponent from '../../components/CheckpointComponent/CheckpointComponent';
 import ProgressComponent from '../HomePage/ProgressComponent/ProgressComponent';
 
+const college_checkpoints = [
+  "Create a resume",
+  "Fill out FAFSA",
+  "Prepare for standardized tests",
+  "Research colleges",
+  "Request letters of recommendation",
+  "Write college essays",
+  "Submit college applications",
+  "Apply for scholarships",
+  "Plan college visits",
+  "Finalize college decision"
+];
+
 function CheckpointsPage() {
   const [completedCheckpoints, setCompletedCheckpoints] = useState([]);
   const [checkpoints, setCheckpoints] = useState([]);
@@ -13,50 +26,26 @@ function CheckpointsPage() {
   const username = queryParams.get('username');
 
   useEffect(() => {
-    const fetchCheckpoints = async () => {
-      try {
-        const response = await fetch(`https://fastapi-hci-project-e870697179dd.herokuapp.com/get_checkpoints?username=${username}`, {
-          method: "GET",
-          credentials: 'include',
-        });
-  
-        if (!response.ok) {
-          throw new Error("Failed to fetch checkpoints");
-        }
-  
-        const data = await response.json();
-        setCheckpoints(data.checkpoints);
-      } catch (error) {
-        console.error("Error fetching checkpoints:", error);
+    const initializeLocalStorage = () => {
+      // Check if checkpoints are already in localStorage
+      const storedCheckpoints = localStorage.getItem('checkpoints');
+      if (!storedCheckpoints) {
+        // If not, initialize localStorage with college_checkpoints
+        localStorage.setItem('checkpoints', JSON.stringify(college_checkpoints));
+        setCheckpoints(college_checkpoints);
+      } else {
+        setCheckpoints(JSON.parse(storedCheckpoints));
       }
-    };
-    fetchCheckpoints();
 
-    const storedCompletedCheckpoints = localStorage.getItem('completedCheckpoints');
-    if (storedCompletedCheckpoints) {
+      // Fetch completed checkpoints from local storage
+      const storedCompletedCheckpoints = localStorage.getItem('completedCheckpoints') || '[]';
       setCompletedCheckpoints(JSON.parse(storedCompletedCheckpoints));
-    }
+    };
+
+    initializeLocalStorage();
   }, [username]);
 
-  const fetchCheckpoints = async () => {
-    try {
-      const response = await fetch(`https://fastapi-hci-project-e870697179dd.herokuapp.com/get_checkpoints?username=${username}`, {
-        method: 'GET',
-        credentials: 'include',
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to fetch checkpoints');
-      }
-
-      const data = await response.json();
-      setCheckpoints(data.checkpoints);
-    } catch (error) {
-      console.error('Error fetching checkpoints:', error);
-    }
-  };
-
-  const handleCheckpointClick = async (clickedCheckpoint) => {
+  const handleCheckpointClick = (clickedCheckpoint) => {
     // Display confirmation pop-up
     const isConfirmed = window.confirm(`You are completing this checkpoint: 
     ${clickedCheckpoint}. 
@@ -77,26 +66,6 @@ function CheckpointsPage() {
       // Set progress and completed checkpoints to localStorage
       localStorage.setItem('completedCheckpoints', JSON.stringify(updatedCompletedCheckpoints));
       localStorage.setItem('progress', progressPercentage);
-
-      // Update the backend with the completed checkpoint
-      const response = await fetch(`https://fastapi-hci-project-e870697179dd.herokuapp.com/complete_checkpoint`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-        body: JSON.stringify({
-          username: username,
-          checkpoint: clickedCheckpoint,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to complete checkpoint on the server');
-      }
-
-      // Fetch updated checkpoints after completion
-      fetchCheckpoints(username);
     } catch (error) {
       console.error('Error completing checkpoint:', error);
     }
@@ -122,15 +91,12 @@ function CheckpointsPage() {
           <ProgressComponent />
       </div>
       <div className="content-container">
-        
-
         <div className="page-checkpoints-list">
           <div className="checkpoints-title" >
             Your Upcoming Checkpoints
           </div>
           <div className="page-checkpoint-container">{renderCheckpoints()}</div>
         </div>
-
         <Link to={`/add_checkpoint?username=${username}`} className="add-checkpoint-button">
           Add Checkpoints
         </Link>

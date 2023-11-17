@@ -9,57 +9,44 @@ import FriendComponent from "../FriendsPage/FriendComponent/FriendComponent";
 function HomePage() {
   const [completedCheckpoints, setCompletedCheckpoints] = useState([]);
   const [friends, setFriends] = useState([]);
-  const [userCheckpoints, setUserCheckpoints] = useState([]);
+  const [allCheckpoints, setAllCheckpoints] = useState([]);
 
   const queryParams = new URLSearchParams(window.location.search);
   const username = queryParams.get('username');
 
   useEffect(() => {
-    // Fetch friends list and user checkpoints from the backend when the component mounts
-    fetchFriendsList(username);
-    fetchUserCheckpoints(username);
+    // Fetch friends list and user checkpoints from localStorage when the component mounts
+    const storedFriends = localStorage.getItem('friends') || '[]';
+    setFriends(JSON.parse(storedFriends));
 
     const storedCompletedCheckpoints = localStorage.getItem('completedCheckpoints');
     if (storedCompletedCheckpoints) {
       setCompletedCheckpoints(JSON.parse(storedCompletedCheckpoints));
     }
+
+    // Initialize the list of all checkpoints with the sample college checkpoints
+    const sampleCollegeCheckpoints = [
+      "Create a resume",
+      "Fill out FAFSA",
+      "Prepare for standardized tests",
+      "Research colleges",
+      "Request letters of recommendation",
+      "Write college essays",
+      "Submit college applications",
+      "Apply for scholarships",
+      "Plan college visits",
+      "Finalize college decision"
+    ];
+
+    setAllCheckpoints(sampleCollegeCheckpoints);
+
+    // Check if there are additional checkpoints in localStorage
+    const storedUserCheckpoints = localStorage.getItem('userCheckpoints');
+    if (storedUserCheckpoints) {
+      const userCheckpointsFromStorage = JSON.parse(storedUserCheckpoints);
+      setAllCheckpoints((prevCheckpoints) => [...prevCheckpoints, ...userCheckpointsFromStorage]);
+    }
   }, [username]);
-
-  const fetchFriendsList = async (username) => {
-    try {
-      const response = await fetch(`https://fastapi-hci-project-e870697179dd.herokuapp.com/get_friends_list?username=${username}`, {
-        method: "GET",
-        credentials: 'include',
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to fetch friends list");
-      }
-
-      const data = await response.json();
-      setFriends(data.friends);
-    } catch (error) {
-      console.error("Error fetching friends list:", error);
-    }
-  };
-
-  const fetchUserCheckpoints = async (username) => {
-    try {
-      const response = await fetch(`https://fastapi-hci-project-e870697179dd.herokuapp.com/get_checkpoints?username=${username}`, {
-        method: "GET",
-        credentials: 'include',
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to fetch user checkpoints");
-      }
-
-      const data = await response.json();
-      setUserCheckpoints(data.checkpoints);
-    } catch (error) {
-      console.error("Error fetching user checkpoints:", error);
-    }
-  };
 
   const handleCheckpointClick = (clickedCheckpoint) => {
     // Display confirmation pop-up
@@ -76,7 +63,7 @@ function HomePage() {
     setCompletedCheckpoints(updatedCompletedCheckpoints);
 
     // Calculate progress percentage
-    const progressPercentage = (updatedCompletedCheckpoints.length / userCheckpoints.length) * 100;
+    const progressPercentage = (updatedCompletedCheckpoints.length / allCheckpoints.length) * 100;
 
     // Set progress and completed checkpoints to localStorage
     localStorage.setItem('completedCheckpoints', JSON.stringify(updatedCompletedCheckpoints));
@@ -84,13 +71,13 @@ function HomePage() {
   };
 
   const renderFriendsList = () => {
-    return friends.slice(0, 3).map((friend) => (
-      <FriendComponent key={friend.id} friend={friend.name} />
+    return friends.slice(0, 3).map((friend, index) => (
+      <FriendComponent key={index} friend={friend} />
     ));
   };
 
   // Filter out completed checkpoints from the list
-  const remainingCheckpoints = userCheckpoints.filter(
+  const remainingCheckpoints = allCheckpoints.filter(
     (checkpoint) => !completedCheckpoints.includes(checkpoint)
   );
 

@@ -11,6 +11,7 @@ function AddFriendPage() {
   const [userDetails, setUserDetails] = useState({ name: "", progress: "" });
   const findUsername = new URLSearchParams(window.location.search);
   const username = findUsername.get('username');
+
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
   };
@@ -31,8 +32,17 @@ function AddFriendPage() {
       if (!response.ok) {
         throw new Error("Friend not found");
       }
+
       // Parse the response JSON
       const { userName, progress } = await response.json();
+      console.log(userName);
+      console.log(progress);
+      // Set friend details to localStorage
+      const storedFriends = localStorage.getItem("friends") || "[]";
+      const friends = JSON.parse(storedFriends);
+      friends.push({ name: userName, progress: progress });
+      localStorage.setItem("friends", JSON.stringify(friends));
+
       setFriendExists(true);
       setUserDetails({ name: userName, progress: progress });
     } catch (error) {

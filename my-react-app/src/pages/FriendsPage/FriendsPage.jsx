@@ -1,4 +1,3 @@
-// FriendsPage.jsx
 import React, { useState, useEffect } from 'react';
 import FriendComponent from './FriendComponent/FriendComponent';
 import { Link } from 'react-router-dom';
@@ -9,33 +8,17 @@ function FriendsPage() {
   const [friends, setFriends] = useState([]);
   const queryParams = new URLSearchParams(window.location.search);
   const username = queryParams.get('username')
+
   useEffect(() => {
-    // Fetch friends list from the backend when the component mounts
-    fetchFriendsList(username);
-  }, [username]); // The empty dependency array means this effect runs once, similar to componentDidMount
-
-  const fetchFriendsList = async (username) => {
-    try {
-      const response = await fetch(`https://fastapi-hci-project-e870697179dd.herokuapp.com/get_friends_list?username=${username}`, {
-        method: "GET",
-        credentials:'include',
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to fetch friends list");
-      }
-
-      const data = await response.json();
-      console.log(data.friends);
-      setFriends(data.friends);
-    } catch (error) {
-      console.error("Error fetching friends list:", error);
-    }
-  };
+    // Fetch friends list from localStorage when the component mounts
+    const storedFriends = localStorage.getItem('friends') || '[]';
+    console.log(storedFriends);
+    setFriends(JSON.parse(storedFriends));
+  }, [username]);
 
   const renderFriendsList = () => {
-    return friends.map((friend) => (
-      <FriendComponent key={friend.id} friend={friend.name} />
+    return friends.map((friend, index) => (
+      <FriendComponent key={index} friend={friend} />
     ));
   };
 

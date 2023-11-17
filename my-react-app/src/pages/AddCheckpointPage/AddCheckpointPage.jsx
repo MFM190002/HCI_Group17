@@ -11,22 +11,13 @@ function AddCheckpointPage({ addCheckpoint }) {
   const username = queryParams.get("username");
   const navigate = useNavigate();
 
-  const handleButtonClick = async () => {
+  const handleButtonClick = () => {
     try {
-      const response = await fetch("https://fastapi-hci-project-e870697179dd.herokuapp.com/add_checkpoint", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: new URLSearchParams({
-          username: username,
-          new_checkpoint: goal,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to add checkpoint");
-      }
+      // Add the checkpoint to local storage
+      const storedCheckpoints = localStorage.getItem("checkpoints") || "[]";
+      const checkpoints = JSON.parse(storedCheckpoints);
+      checkpoints.push(goal);
+      localStorage.setItem("checkpoints", JSON.stringify(checkpoints));
 
       // Update the state or perform any additional actions as needed
       addCheckpoint(goal);
@@ -61,10 +52,7 @@ function AddCheckpointPage({ addCheckpoint }) {
               placeholder="Enter your goal"
               className="input-rectangle"
             />
-            <Link
-              to={`/checkpoints?username=${username}`}
-              onClick={handleButtonClick}
-            >
+            <Link to={`/checkpoints?username=${username}`} onClick={handleButtonClick}>
               <img className="img" alt="plus" src={plus} />
             </Link>
           </div>
