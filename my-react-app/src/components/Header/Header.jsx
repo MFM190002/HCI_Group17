@@ -5,21 +5,17 @@ import './Header.css'; // Make sure to import your CSS file
 const Header = ({ username }) => {
   return (
     <div className="header-container">
-      <div className="home-button">
+      <Link to={`/home?username=${username}`} className="home-button">
         <div className="rectangle">
-          <Link to={`/home?username=${username}`} className="home-link">
-            Home
-          </Link>
+          <span className="home-link">Home</span>
         </div>
-      </div>
+      </Link>
       <div className="header-text">IDCollege</div>
-      <div className="logout-button">
-        <div className='rectangle'>
-            <Link to="/" className="logout-link">
-            Sign Out
-            </Link>
+      <Link to="/" className="logout-button">
+        <div className="rectangle">
+          <span className="logout-link">Sign Out</span>
         </div>
-      </div>
+      </Link>
     </div>
   );
 };
