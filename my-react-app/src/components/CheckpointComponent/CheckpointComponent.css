@@ -23,3 +23,7 @@
   .home-checkpoint:hover .home-checkpoint-icon {
     background-color: #37ff00; /* Darker green on hover */
   }
+
+  .home-checkpoint.completed .home-checkpoint-icon {
+    background-color: #4caf50; /* Green color for completed checkpoints */
+  }
