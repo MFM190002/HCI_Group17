@@ -20,6 +20,11 @@ function SignupPage() {
   };
 
   const handleSignup = async () => {
+    // Check if any field is empty
+    if (!firstName || !lastName || !username || !password || !confirmPassword) {
+      setPasswordError("Please fill in all fields");
+      return;
+    }
     if (password !== confirmPassword) {
       setPasswordError("Passwords do not match");
     } else {

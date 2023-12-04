@@ -9,11 +9,25 @@ export const JourneyPage = () => {
   const [isCustomGoal, setIsCustomGoal] = useState(false);
   const [selectedGoal, setSelectedGoal] = useState("");
   const [customGoal, setCustomGoal] = useState(""); // State to store the custom goal
+  const [error, setError] = useState(""); // State to store the error message
 
   const queryParams = new URLSearchParams(window.location.search);
   const username = queryParams.get('username')
 
-  const handleButtonClick = () => {
+  const handleButtonClick = (event) => {
+    event.preventDefault(); // Prevent the default behavior (navigation)
+    if (!selectedGoal) {
+      setError("Please select a journey before proceeding");
+      return;
+    }
+  
+    // Process the custom goal or navigate
+    if (isCustomGoal && customGoal) {
+      console.log("Custom goal set:", customGoal); // Replace with goal processing logic
+    }
+  
+    // Reset error if a journey is selected
+    setError("");
     navigate(`/home?username=${username}`);
   };
 
@@ -74,6 +88,7 @@ export const JourneyPage = () => {
             </Link>
           </div>
         </div>
+        {error && <div className="error-message">{error}</div>}
         <div className="text-wrapper-3">Set your college application goal</div>
       </div>
     </div>
