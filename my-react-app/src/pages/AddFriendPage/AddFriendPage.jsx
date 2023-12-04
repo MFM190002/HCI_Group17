@@ -7,13 +7,55 @@ import FriendComponent from '../FriendsPage/FriendComponent/FriendComponent';
 function AddFriendPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [friendExists, setFriendExists] = useState(false);
+  const [friendError, setFriendError] = useState('');
   const navigate = useNavigate();
   const [userDetails, setUserDetails] = useState({ name: "", progress: "" });
   const findUsername = new URLSearchParams(window.location.search);
   const username = findUsername.get('username');
 
+  const handleButtonClick = async () => {
+    try {
+      // Try handleSearch first
+      await handleSearch();
+    } catch (error) {
+      // If handleSearch fails, catch the error here and then try searchFriendInSession
+      console.error('Error in handleSearch:', error);
+
+      try {
+        await searchFriendInSession(searchTerm);
+      } catch (searchError) {
+        // Handle the error from searchFriendInSession if needed
+        console.error('Error in searchFriendInSession:', searchError);
+        setFriendError('Friend not found');
+        setFriendExists(false);
+      }
+    }
+  };
+
+  const searchFriendInSession = async (searchTerm) => {
+    try {
+      const friendDataString = sessionStorage.getItem('userData');
+      if (!friendDataString) {
+        throw new Error("Friend not found in session storage");
+      }
+
+      const friendData = JSON.parse(friendDataString);
+      if (friendData.username === searchTerm) {
+        setFriendExists(true);
+        setUserDetails({ name: friendData.firstName, progress: friendData.progress });
+      } else {
+        throw new Error("Friend not found");
+      }
+    } catch (error) {
+      console.error("Friend not found:", error);
+      setFriendExists(false);
+      throw error;
+    }
+  };
+  
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
+    setFriendError('')
   };
 
   const handleSearch = async () => {
@@ -48,6 +90,7 @@ function AddFriendPage() {
     } catch (error) {
       console.error("Friend not found:", error);
       setFriendExists(false);
+      throw error;
     }
   };
 
@@ -70,10 +113,11 @@ function AddFriendPage() {
           onChange={handleSearchChange}
           className="search-input"
         />
-        <button onClick={handleSearch} className="search-button">
+        <button onClick={handleButtonClick} className="search-button">
           🔍
         </button>
       </div>
+      {friendError && <p className="friend-error">{friendError}</p>}
       {friendExists && (
         <div>
           {/* Render FriendComponent here */}

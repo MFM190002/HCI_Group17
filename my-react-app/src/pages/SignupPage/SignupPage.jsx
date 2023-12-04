@@ -49,6 +49,11 @@ function SignupPage() {
         }
 
         console.log("Signup successful");
+        sessionStorage.setItem('userData', JSON.stringify({
+          username,
+          firstName,
+          progress: 0,
+        }));
         navigate(`/journey?username=${username}`);
       } catch (error) {
         console.error("Error during signup:", error);
