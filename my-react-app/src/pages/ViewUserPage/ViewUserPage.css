@@ -1,0 +1,33 @@
+/* styles.css */
+
+.view-user-page {
+    background-color: #a9d2f7;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .view-user-title  {
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 64px;
+  }
+
+  .user-stats {
+    padding-top: 50px;
+    font-size: 24px;
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+    font-size: 24px;
+  }
+  
+  li {
+    margin-bottom: 8px;
+  }
+  

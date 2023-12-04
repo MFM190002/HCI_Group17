@@ -60,7 +60,7 @@ function AddFriendPage() {
 
   const handleSearch = async () => {
     try {
-      const response = await fetch("https://fastapi-hci-project-e870697179dd.herokuapp.com/check_friend", {
+      const response = await fetch("http://127.0.0.1:8000/check_friend", {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",

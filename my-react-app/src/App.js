@@ -9,6 +9,7 @@ import FriendsPage from './pages/FriendsPage/FriendsPage';
 import AddFriendPage from './pages/AddFriendPage/AddFriendPage';
 import AddCheckpointPage from './pages/AddCheckpointPage/AddCheckpointPage';
 import CheckpointsPage from './pages/CheckpointsPage/CheckpointsPage';
+import ViewUserProfile from './pages/ViewUserPage/ViewUserPage';
 function App() {
   const [checkpoints, setCheckpoints] = React.useState(['Draft College Essay', 'Fill out FAFSA', 'Start UTD App']);
 
@@ -42,6 +43,7 @@ function App() {
             element={<AddCheckpointPage addCheckpoint={addCheckpoint} />}
           />
           <Route path="/addfriends" element={<AddFriendPage />} />
+          <Route path="/viewprofile" element = {<ViewUserProfile />} ></Route>
         </Routes>
       </BrowserRouter>
     </div>
