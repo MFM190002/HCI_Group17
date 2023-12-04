@@ -40,28 +40,39 @@ function CheckpointsPage() {
   }, []);
 
   const handleCheckpointClick = (clickedCheckpoint) => {
-    const isConfirmed = window.confirm(`You are completing this checkpoint: ${clickedCheckpoint}. Confirm?`);
+    const isCompleted = completedCheckpoints.includes(clickedCheckpoint);
+    const confirmationMessage = isCompleted
+      ? `You are marking this checkpoint as incomplete: ${clickedCheckpoint}. Confirm?`
+      : `You are completing this checkpoint: ${clickedCheckpoint}. Confirm?`;
+  
+    const isConfirmed = window.confirm(confirmationMessage);
     
     if (!isConfirmed) {
       return;
     }
-
+  
     try {
-      const updatedCompletedCheckpoints = [...completedCheckpoints, clickedCheckpoint];
+      let updatedCompletedCheckpoints;
+      if (isCompleted) {
+        // Undo completion
+        updatedCompletedCheckpoints = completedCheckpoints.filter(cp => cp !== clickedCheckpoint);
+      } else {
+        // Complete checkpoint
+        updatedCompletedCheckpoints = [...completedCheckpoints, clickedCheckpoint];
+      }
+  
       setCompletedCheckpoints(updatedCompletedCheckpoints);
-
-      const updatedCheckpoints = checkpoints.filter(cp => cp !== clickedCheckpoint);
-      setCheckpoints(updatedCheckpoints);
-
+  
       const progressPercentage = (updatedCompletedCheckpoints.length / college_checkpoints.length) * 100;
-
+  
       localStorage.setItem('completedCheckpoints', JSON.stringify(updatedCompletedCheckpoints));
       localStorage.setItem('progress', progressPercentage);
-      localStorage.setItem('checkpoints', JSON.stringify(updatedCheckpoints));
     } catch (error) {
-      console.error('Error completing checkpoint:', error);
+      console.error('Error updating completion status of checkpoint:', error);
     }
   };
+  
+   
 
   const handleCheckpointDelete = (deletedCheckpoint) => {
     const isConfirmed = window.confirm(`Are you sure you want to delete "${deletedCheckpoint}"?`);

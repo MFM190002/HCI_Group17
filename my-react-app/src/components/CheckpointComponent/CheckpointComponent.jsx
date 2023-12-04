@@ -36,6 +36,12 @@ const CheckpointComponent = ({ checkpoint, onCheckClick, onCheckDelete, complete
     setDropdownOpen(false);
   };
 
+  const handleUndo = () => {
+    // Call the onCheckClick function to mark the checkpoint as not completed
+    onCheckClick(checkpoint);
+    setDropdownOpen(false);
+  };
+
   const handleInputChange = (event) => {
     setEditedCheckpoint(event.target.value);
   };
@@ -68,7 +74,7 @@ const CheckpointComponent = ({ checkpoint, onCheckClick, onCheckDelete, complete
             onChange={handleInputChange}
             onKeyDown={handleInputKeyDown}
             onBlur={handleEditConfirm}
-            style={{ height: '40px', width: '200px', fontSize: '16px' }} // Adjust the height and width as needed
+            style={{ height: '40px', width: '200px', fontSize: '16px' }} // Adjust the height, width, and fontSize as needed
             autoFocus
           />
         ) : (
@@ -77,14 +83,23 @@ const CheckpointComponent = ({ checkpoint, onCheckClick, onCheckDelete, complete
             {completed && <span style={{ marginLeft: '10px' }}>✅</span>}
           </>
         )}
-        <div className="dropdown" style={{ marginLeft: '10px'}}>
+        <div className="dropdown" style={{ marginLeft: '20px', marginRight: '10px' }}>
           <button className="dropdown-btn" onClick={handleDropdownToggle}>
             ...
           </button>
           {dropdownOpen && (
             <div className="dropdown-content">
-              <button onClick={handleEdit}>Edit</button>
-              <button onClick={handleDelete}>Delete</button>
+              {completed ? (
+                <>
+                  <button onClick={handleUndo}>Undo</button>
+                  <button onClick={handleDelete}>Delete</button>
+                </>
+              ) : (
+                <>
+                  <button onClick={handleEdit}>Edit</button>
+                  <button onClick={handleDelete}>Delete</button>
+                </>
+              )}
             </div>
           )}
         </div>
