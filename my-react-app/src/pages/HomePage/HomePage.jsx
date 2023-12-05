@@ -5,6 +5,7 @@ import ProgressComponent from "./ProgressComponent/ProgressComponent";
 import CheckpointComponent from "../../components/CheckpointComponent/CheckpointComponent";
 import Header from "../../components/Header/Header";
 import FriendComponent from "../FriendsPage/FriendComponent/FriendComponent";
+import Cookies from "js-cookie";
 
 function HomePage() {
   const [completedCheckpoints, setCompletedCheckpoints] = useState([]);
@@ -13,15 +14,17 @@ function HomePage() {
 
   const queryParams = new URLSearchParams(window.location.search);
   const username = queryParams.get('username');
+  const userData = JSON.parse(Cookies.get(`user_${username}`));
 
   useEffect(() => {
     // Fetch friends list and user checkpoints from localStorage when the component mounts
-    const storedFriends = localStorage.getItem('friends') || '[]';
+    const storedFriends = Cookies.get(`friends_${username}`) || '[]';
     setFriends(JSON.parse(storedFriends));
 
-    const storedCompletedCheckpoints = localStorage.getItem('completedCheckpoints');
-    if (storedCompletedCheckpoints) {
-      setCompletedCheckpoints(JSON.parse(storedCompletedCheckpoints));
+    const userData = JSON.parse(Cookies.get(`user_${username}`));
+    const storedCompletedCheckpoints = userData.completedCheckpoints || [];
+    if (storedCompletedCheckpoints && storedCompletedCheckpoints.length > 0) {
+      setCompletedCheckpoints(storedCompletedCheckpoints);
     }
 
     // Initialize the list of all checkpoints with the sample college checkpoints
@@ -41,13 +44,14 @@ function HomePage() {
     setAllCheckpoints(sampleCollegeCheckpoints);
 
     // Check if there are additional checkpoints in localStorage
-    const storedUserCheckpoints = localStorage.getItem('userCheckpoints');
+    const storedUserCheckpoints = Cookies.get(`checkpoints_${username}`);
     if (storedUserCheckpoints) {
       const userCheckpointsFromStorage = JSON.parse(storedUserCheckpoints);
       setAllCheckpoints((prevCheckpoints) => [...prevCheckpoints, ...userCheckpointsFromStorage]);
     }
   }, [username]);
 
+  Cookies.set(`checkpoints_${username}`, JSON.stringify(allCheckpoints));
   const handleCheckpointClick = (clickedCheckpoint) => {
     // Display confirmation pop-up
     const isConfirmed = window.confirm(`You are completing this checkpoint:
@@ -66,8 +70,9 @@ function HomePage() {
     const progressPercentage = (updatedCompletedCheckpoints.length / allCheckpoints.length) * 100;
 
     // Set progress and completed checkpoints to localStorage
-    localStorage.setItem('completedCheckpoints', JSON.stringify(updatedCompletedCheckpoints));
-    localStorage.setItem('progress', progressPercentage);
+    console.log(allCheckpoints)
+    Cookies.set(userData.completedCheckpoints, JSON.stringify(updatedCompletedCheckpoints));
+    Cookies.set(userData.progress, progressPercentage.toString());
   };
 
   const renderFriendsList = () => {

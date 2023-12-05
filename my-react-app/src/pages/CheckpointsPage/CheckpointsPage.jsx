@@ -22,6 +22,9 @@ function CheckpointsPage() {
   const [completedCheckpoints, setCompletedCheckpoints] = useState([]);
   const [checkpoints, setCheckpoints] = useState([]);
 
+  const queryParams = new URLSearchParams(window.location.search);
+  const username = queryParams.get('username');
+  
   useEffect(() => {
     const initializeLocalStorage = () => {
       const storedCheckpoints = localStorage.getItem('checkpoints');
@@ -103,7 +106,7 @@ function CheckpointsPage() {
 
   return (
     <div className="checkpoints-page-1">
-      <Header username={'SampleUser'} />
+      <Header username={username} />
       <div className="content-container">
         <div className="page-checkpoints-list">
           <div className="checkpoints-title">
@@ -111,7 +114,7 @@ function CheckpointsPage() {
           </div>
           <div className="page-checkpoint-container">{renderCheckpoints()}</div>
         </div>
-        <Link to={`/add_checkpoint?username=SampleUser`} className="add-checkpoint-button">
+        <Link to={`/add_checkpoint?username=${username}`} className="add-checkpoint-button">
           Add Checkpoints
         </Link>
       </div>
