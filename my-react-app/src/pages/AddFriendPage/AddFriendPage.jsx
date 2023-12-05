@@ -96,6 +96,20 @@ function AddFriendPage() {
 
   const handleConfirmAddFriend = () => {
     // Perform any additional actions before navigating to the friends endpoint
+    const friendDataString = sessionStorage.getItem('userData');
+    if (friendDataString) {
+      const friendData = JSON.parse(friendDataString);
+      const storedFriends = localStorage.getItem("friends") || "[]";
+      const friends = JSON.parse(storedFriends);
+      
+      // Check if the friend is not already in the friends list
+      const friendExistsInList = friends.some(friend => friend.name === friendData.firstName);
+
+      if (!friendExistsInList) {
+        friends.push({ name: friendData.firstName, progress: friendData.progress });
+        localStorage.setItem("friends", JSON.stringify(friends));
+      }
+    }
     navigate(`/friends?username=${username}`);
   };
 
