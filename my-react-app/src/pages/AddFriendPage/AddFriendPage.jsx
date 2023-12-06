@@ -79,7 +79,7 @@ function AddFriendPage() {
       {friendExists && (
         <div>
           {/* Render FriendComponent here */}
-          <FriendComponent friend={userDetails} />
+          <FriendComponent friend={userDetails} username={username}/>
           <button onClick={handleConfirmAddFriend} className="confirm-add-friend">
             Confirm Add Friend
           </button>

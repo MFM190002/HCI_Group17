@@ -33,10 +33,13 @@ const Profile = () => {
   
 
   const handleIncrementApplications = () => {
-    setProfileData((prevData) => ({
-      ...prevData,
-      applicationsCompleted: (prevData.applicationsCompleted || 0) + 1,
-    }));
+    const isConfirmed = window.confirm(`Are you sure you completed an application?`);
+    if (isConfirmed) {
+      setProfileData((prevData) => ({
+        ...prevData,
+        applicationsCompleted: (prevData.applicationsCompleted || 0) + 1,
+      }));
+    }
   };
 
   useEffect(() => {

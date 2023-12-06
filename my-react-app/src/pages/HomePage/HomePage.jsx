@@ -137,7 +137,15 @@ function HomePage() {
     // Display only the first three checkpoints
     const displayedCheckpoints = remainingCheckpoints.slice(0, 3);
     return displayedCheckpoints.map((checkpoint, index) => (
-      <CheckpointComponent key={index} checkpoint={checkpoint} onCheckClick={handleCheckpointClick} onCheckEdit={handleCheckpointEdit} onCheckDelete={handleCheckpointDelete} completed={completedCheckpoints.includes(checkpoint)}/>
+      <CheckpointComponent
+        key={index}
+        checkpoint={checkpoint}
+        onCheckClick={handleCheckpointClick}
+        onCheckEdit={handleCheckpointEdit}
+        onCheckDelete={handleCheckpointDelete}
+        completed={completedCheckpoints.includes(checkpoint)}
+        disableActions={true}  // Set to true to disable actions
+      />
     ));
   };
 

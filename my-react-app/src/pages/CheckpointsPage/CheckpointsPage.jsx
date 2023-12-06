@@ -1,5 +1,5 @@
 // CheckpointsPage.jsx
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../../components/Header/Header';
 import CheckpointComponent from '../../components/CheckpointComponent/CheckpointComponent';
@@ -18,6 +18,11 @@ function CheckpointsPage() {
   );
   const [checkpoints, setCheckpoints] = useState(JSON.parse(userCheckpoints) || []);
 
+  useEffect(
+    () => {
+      console.log(checkpoints);
+    }, [checkpoints]
+  );
 
   const handleCheckpointClick = (clickedCheckpoint) => {
     try {
@@ -72,16 +77,11 @@ function CheckpointsPage() {
       );
 
       setCheckpoints(updatedCheckpoints);
-
-      const userData = Cookies.get(`user_${username}`);
-      const parsedUserData = userData ? JSON.parse(userData) : {};
-
-      parsedUserData.checkpoints = updatedCheckpoints;
-      parsedUserData.completedCheckpoints = completedCheckpoints;
       // Note: Do not update progress for editing
 
-      console.log('Updated User Data:', parsedUserData);
-      Cookies.set(`user_${username}`, JSON.stringify(parsedUserData));
+      console.log('Updated User Data:', updatedCheckpoints);
+      Cookies.set(`checkpoints_${username}`, JSON.stringify(updatedCheckpoints));
+      console.log(Cookies.get(`checkpoints_${username}`) || '[]');
     } catch (error) {
       console.error('Error updating edited checkpoint:', error);
     }
@@ -94,10 +94,21 @@ function CheckpointsPage() {
         const updatedCheckpoints = checkpoints.filter(cp => cp !== deletedCheckpoint);
         setCheckpoints(updatedCheckpoints);
 
-        const userData = Cookies.get(`user_${username}`);
-        const parsedUserData = userData ? JSON.parse(userData) : {};
-        parsedUserData.checkpoints = updatedCheckpoints;
-        Cookies.set(`user_${username}`, JSON.stringify(parsedUserData));
+        Cookies.set(`checkpoints_${username}`, JSON.stringify(updatedCheckpoints));
+        
+        let data = Cookies.get(`user_${username}`) || '{}';
+        data = JSON.parse(data);  // Parse the string into an object
+        const completedCheckpoints = data.completedCheckpoints || [];
+  
+        const progressPercentage =
+          (completedCheckpoints.length / updatedCheckpoints.length) * 100;
+  
+        data.progress = progressPercentage;  // Now `data` is an object, and you can set properties on it
+        console.log(data.progress);
+        console.log(progressPercentage);
+        Cookies.set(`user_${username}`, JSON.stringify(data));
+
+        window.location.reload();
       } catch (error) {
         console.error('Error deleting checkpoint:', error);
       }

@@ -4,6 +4,7 @@ import "./AddCheckpointPage.css";
 import { useNavigate } from "react-router-dom";
 import plus from "./icons8-plus-60.png";
 import Header from "../../components/Header/Header";
+import Cookies from 'js-cookie';
 
 function AddCheckpointPage({ addCheckpoint }) {
   const [goal, setGoal] = useState("");
@@ -14,11 +15,22 @@ function AddCheckpointPage({ addCheckpoint }) {
   const handleButtonClick = () => {
     try {
       // Add the checkpoint to local storage
-      const storedCheckpoints = localStorage.getItem("checkpoints") || "[]";
-      const checkpoints = JSON.parse(storedCheckpoints);
+      const userCheckpoints = Cookies.get(`checkpoints_${username}`) || '[]';
+      const checkpoints = JSON.parse(userCheckpoints);
       checkpoints.push(goal);
-      localStorage.setItem("checkpoints", JSON.stringify(checkpoints));
+      Cookies.set(`checkpoints_${username}`, JSON.stringify(checkpoints));
 
+      let data = Cookies.get(`user_${username}`) || '{}';
+      data = JSON.parse(data);  // Parse the string into an object
+      const completedCheckpoints = data.completedCheckpoints || [];
+
+      const progressPercentage =
+        (completedCheckpoints.length / checkpoints.length) * 100;
+
+      data.progress = progressPercentage;  // Now `data` is an object, and you can set properties on it
+      console.log(data.progress);
+      console.log(progressPercentage);
+      Cookies.set(`user_${username}`, JSON.stringify(data));
       // Update the state or perform any additional actions as needed
       addCheckpoint(goal);
 
