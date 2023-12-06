@@ -5,10 +5,8 @@ import Cookies from 'js-cookie';
 const ProgressComponent = () => {
   const queryParams = new URLSearchParams(window.location.search);
   const username = queryParams.get('username');
-  //const retrievedProgress = Cookies.get(`user_${username}_progress`);
   const userData = JSON.parse(Cookies.get(`user_${username}`) || '{}');
   const rawProgressPercentage = userData.progress || 0;
-  console.log(userData.progress);
   const roundedProgressPercentage = Math.round(parseFloat(rawProgressPercentage));
 
   return (
