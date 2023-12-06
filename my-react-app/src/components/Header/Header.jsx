@@ -1,8 +1,15 @@
-import React from 'react';
+// Header.js
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './Header.css'; // Make sure to import your CSS file
+import './Header.css';
 
 const Header = ({ username }) => {
+  const [dropdownOpen, setDropdownOpen] = useState(true);
+
+  const handleDropdownToggle = (event) => {
+    setDropdownOpen(!dropdownOpen);
+  };
+
   return (
     <div className="header-container">
       <Link to={`/home?username=${username}`} className="home-button">
@@ -11,11 +18,23 @@ const Header = ({ username }) => {
         </div>
       </Link>
       <div className="header-text">IDCollege</div>
-      <Link to="/" className="logout-button">
-        <div className="rectangle">
-          <span className="logout-link">Sign Out</span>
+      <div className="dropdown-container">
+        <div className="user-settings-button">
+          <div className="rectangle">
+            <span className="user-settings-link" onClick={handleDropdownToggle}>User Settings</span>
+          </div>
         </div>
-      </Link>
+        {dropdownOpen && (
+          <div className="dropdown-menu">
+            <Link to={`/editprofile?username=${username}`} className="dropdown-item">
+              Edit Profile
+            </Link>
+            <Link to="/" className="dropdown-item">
+              Sign Out
+            </Link>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

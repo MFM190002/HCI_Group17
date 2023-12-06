@@ -11,6 +11,7 @@ import AddCheckpointPage from './pages/AddCheckpointPage/AddCheckpointPage';
 import CheckpointsPage from './pages/CheckpointsPage/CheckpointsPage';
 import ViewUserProfile from './pages/ViewUserPage/ViewUserPage';
 import Cookies from 'js-cookie';
+import Profile from './pages/EditProfile/EditProfile';
 
 function App() {
   useEffect(() => {
@@ -99,6 +100,7 @@ function App() {
           />
           <Route path="/addfriends" element={<AddFriendPage />} />
           <Route path="/viewprofile" element = {<ViewUserProfile />} ></Route>
+          <Route path="/editprofile" element = {<Profile />} />
         </Routes>
       </BrowserRouter>
     </div>
