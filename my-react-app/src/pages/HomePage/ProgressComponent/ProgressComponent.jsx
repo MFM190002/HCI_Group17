@@ -1,8 +1,12 @@
 import React from 'react';
 import './ProgressComponent.css';
+import Cookies from 'js-cookie';
 
 const ProgressComponent = () => {
-  const rawProgressPercentage = localStorage.getItem('progress') || 0;
+  const queryParams = new URLSearchParams(window.location.search);
+  const username = queryParams.get('username');
+  const userData = JSON.parse(Cookies.get(`user_${username}`) || '{}');
+  const rawProgressPercentage = userData.progress || 0;
   const roundedProgressPercentage = Math.round(parseFloat(rawProgressPercentage));
 
   return (

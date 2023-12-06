@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import FriendComponent from './FriendComponent/FriendComponent';
 import { Link } from 'react-router-dom';
 import Header from '../../components/Header/Header';
+import Cookies from 'js-cookie';
 import "./FriendsPage.css"
 
 function FriendsPage() {
@@ -11,14 +12,13 @@ function FriendsPage() {
 
   useEffect(() => {
     // Fetch friends list from localStorage when the component mounts
-    const storedFriends = localStorage.getItem('friends') || '[]';
-    console.log(storedFriends);
+    const storedFriends = Cookies.get(`friends_${username}`) || '[]';
     setFriends(JSON.parse(storedFriends));
   }, [username]);
 
   const renderFriendsList = () => {
     return friends.map((friend, index) => (
-      <FriendComponent key={index} friend={friend} />
+      <FriendComponent key={index} friend={friend} username={username}/>
     ));
   };
 

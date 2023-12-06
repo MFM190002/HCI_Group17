@@ -1,22 +1,20 @@
-// CheckpointComponent.js
 import React, { useState } from 'react';
 import './CheckpointComponent.css';
 
-const CheckpointComponent = ({ checkpoint, onCheckClick, onCheckDelete, completed }) => {
+const CheckpointComponent = ({ checkpoint, onCheckClick, onCheckEdit, onCheckDelete, completed, disableActions }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [editing, setEditing] = useState(false);
   const [editedCheckpoint, setEditedCheckpoint] = useState(checkpoint);
 
   const handleClick = () => {
-    // Only allow clicking if the checkpoint is not completed
-    if (!completed) {
+    if (!completed && !disableActions) {
       onCheckClick(checkpoint);
     }
   };
 
   const handleDropdownToggle = () => {
     setDropdownOpen(!dropdownOpen);
-    setEditing(false); // Close editing mode when opening/closing dropdown
+    setEditing(false);
   };
 
   const handleEdit = () => {
@@ -24,20 +22,20 @@ const CheckpointComponent = ({ checkpoint, onCheckClick, onCheckDelete, complete
   };
 
   const handleEditConfirm = () => {
-    // Add your logic for handling the edited name confirmation
-    // For example, you might want to update the checkpoint name in the state or trigger an API call
     console.log('Edited checkpoint:', editedCheckpoint);
-    setEditing(false); // Exit editing mode
+    onCheckEdit(editedCheckpoint, checkpoint);
+    setEditing(false);
     setDropdownOpen(false);
   };
 
   const handleDelete = () => {
-    onCheckDelete(checkpoint);
+    if (!disableActions) {
+      onCheckDelete(checkpoint);
+    }
     setDropdownOpen(false);
   };
 
   const handleUndo = () => {
-    // Call the onCheckClick function to mark the checkpoint as not completed
     onCheckClick(checkpoint);
     setDropdownOpen(false);
   };
@@ -48,15 +46,15 @@ const CheckpointComponent = ({ checkpoint, onCheckClick, onCheckDelete, complete
 
   const handleInputKeyDown = (event) => {
     if (event.key === 'Enter') {
-      event.preventDefault(); // Prevent the default form submission behavior
+      event.preventDefault();
       handleEditConfirm();
     }
   };
 
-  const cursorStyle = completed ? 'default' : 'pointer';
+  const cursorStyle = (completed || disableActions) ? 'default' : 'pointer';
 
   return (
-    <div className={`home-checkpoint ${completed ? 'completed' : ''}`}>
+    <div className={`home-checkpoint ${completed ? 'completed' : ''} ${disableActions ? 'home-checkpoint-actions-disabled' : ''}`}>
       <div
         className="home-checkpoint-text"
         style={{ display: 'flex', alignItems: 'center' }}
@@ -74,7 +72,7 @@ const CheckpointComponent = ({ checkpoint, onCheckClick, onCheckDelete, complete
             onChange={handleInputChange}
             onKeyDown={handleInputKeyDown}
             onBlur={handleEditConfirm}
-            style={{ height: '40px', width: '200px', fontSize: '16px' }} // Adjust the height, width, and fontSize as needed
+            style={{ height: '40px', width: '200px', fontSize: '16px' }}
             autoFocus
           />
         ) : (
@@ -91,13 +89,13 @@ const CheckpointComponent = ({ checkpoint, onCheckClick, onCheckDelete, complete
             <div className="dropdown-content">
               {completed ? (
                 <>
-                  <button onClick={handleUndo}>Undo</button>
-                  <button onClick={handleDelete}>Delete</button>
+                  {!disableActions && <button onClick={handleUndo}>Undo</button>}
+                  {!disableActions && <button onClick={handleDelete}>Delete</button>}
                 </>
               ) : (
                 <>
-                  <button onClick={handleEdit}>Edit</button>
-                  <button onClick={handleDelete}>Delete</button>
+                  {!disableActions && <button onClick={handleEdit}>Edit</button>}
+                  {!disableActions && <button onClick={handleDelete}>Delete</button>}
                 </>
               )}
             </div>

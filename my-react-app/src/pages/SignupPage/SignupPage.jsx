@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./SignupPage.css";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 function SignupPage() {
   const [firstName, setFirstName] = useState("");
@@ -31,29 +32,23 @@ function SignupPage() {
       setPasswordError(""); 
 
       try {
-        const response = await fetch("https://fastapi-hci-project-e870697179dd.herokuapp.com/signup", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            firstName,
-            lastName,
-            username,
-            password,
-          }),
-        });
+        // Update to use cookies for signup
+        const userData = {
+          username,
+          password,
+          progress: 0,
+          friends: [],
+          checkpoints: [],
+          completedCheckpoints: [],
+          applicationsCompleted: 0,
+          targetUniversities: []
+        };
 
-        if (!response.ok) {
-          throw new Error("Signup failed");
-        }
+        Cookies.set(`user_${username}`, JSON.stringify(userData));
+        Cookies.set(`friends_${username}`, JSON.stringify([])); // Initialize friends as an empty array
+        Cookies.set(`checkpoints_${username}`, JSON.stringify([])); // Initialize checkpoints as an empty array
 
         console.log("Signup successful");
-        sessionStorage.setItem('userData', JSON.stringify({
-          username,
-          firstName,
-          progress: 0,
-        }));
         navigate(`/journey?username=${username}`);
       } catch (error) {
         console.error("Error during signup:", error);

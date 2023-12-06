@@ -3,24 +3,23 @@
 import React, { useState, useEffect } from 'react';
 import './ViewUserPage.css';
 import Header from '../../components/Header/Header';
+import Cookies from 'js-cookie';
 const ViewUserProfile = () => {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  const username = new URLSearchParams(window.location.search).get('username');
+  const friendname = new URLSearchParams(window.location.search).get('friendname');
+  const data = Cookies.get(`user_${friendname}`);
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const username = new URLSearchParams(window.location.search).get('username');
 
         if (!username) {
           throw new Error('Username not provided in search params');
         }
-
-        const response = await fetch(`http://127.0.0.1:8000/get_user_info?username=${username}`);
-        const data = await response.json();
-
-        setUserData(data);
+        console.log(data);
+        setUserData((data) ? JSON.parse(data) : data);
       } catch (error) {
         setError(error.message);
       } finally {
@@ -29,7 +28,7 @@ const ViewUserProfile = () => {
     };
 
     fetchUserData();
-  }, []);
+  }, [username, data]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -41,12 +40,11 @@ const ViewUserProfile = () => {
 
   return (
     <div className="view-user-page">
-      < Header />
+      <Header username={username} />
       <div className="view-user-title" >
         {userData.username}
       </div>
       <div className="user-stats">
-        <p>Checkpoints Completed: {userData.checkpointsCompleted}</p>
         <p>Applications Completed: {userData.applicationsCompleted}</p>
       </div>
       <div className="user-target-universities">

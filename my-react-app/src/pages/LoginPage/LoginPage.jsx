@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./LoginPage.css";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 function LoginPage() {
   const [username, setUsername] = useState("");
@@ -9,25 +10,25 @@ function LoginPage() {
   
   const navigate = useNavigate();
 
-  const handleSubmit = async (event) => {
+  const handleSubmit =  (event) => {
     event.preventDefault();
     console.log("Submitted credentials:", username, password);
 
     try {
-      const formData = new FormData();
-      formData.append("username", username);
-      formData.append("password", password);
-
-      const response = await fetch("https://fastapi-hci-project-e870697179dd.herokuapp.com/login", {
-        method: "POST",
-        body: formData,
-      });
-
-      if (!response.ok) {
+      // Replace API call with getting user data from cookies
+      const storedUserData = Cookies.get(`user_${username}`);
+      if (!storedUserData) {
         throw new Error("Invalid credentials");
       }
 
-      // If the response is successful, navigate to /home
+      const userData = JSON.parse(storedUserData);
+
+      // Check if the provided password matches the stored password
+      if (password !== userData.password) {
+        throw new Error("Invalid credentials");
+      }
+
+      // If the credentials are valid, navigate to /home
       navigate(`/home?username=${username}`);
     } catch (error) {
       // If an error occurs, handle it and set the error state

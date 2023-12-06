@@ -3,29 +3,43 @@ import { useNavigate } from "react-router-dom";
 import "./JourneyPage.css";
 import { Link } from "react-router-dom";
 import submit from "./icons8-enter-64.png";
+import Cookies from "js-cookie";
 
 export const JourneyPage = () => {
   const navigate = useNavigate();
   const [isCustomGoal, setIsCustomGoal] = useState(false);
   const [selectedGoal, setSelectedGoal] = useState("");
-  const [customGoal, setCustomGoal] = useState(""); // State to store the custom goal
-  const [error, setError] = useState(""); // State to store the error message
-
+  const [customGoal, setCustomGoal] = useState("");
+  const [error, setError] = useState("");
   const queryParams = new URLSearchParams(window.location.search);
-  const username = queryParams.get('username')
+  const username = queryParams.get('username');
+  const allCheckpoints = [
+    "Create a resume",
+    "Fill out FAFSA",
+    "Prepare for standardized tests",
+    "Research colleges",
+    "Request letters of recommendation",
+    "Write college essays",
+    "Submit college applications",
+    "Apply for scholarships",
+    "Plan college visits",
+    "Finalize college decision"
+  ];
 
   const handleButtonClick = (event) => {
-    event.preventDefault(); // Prevent the default behavior (navigation)
+    event.preventDefault();
     if (!selectedGoal) {
       setError("Please select a journey before proceeding");
       return;
     }
-  
-    // Process the custom goal or navigate
+
+    // Process the custom goal or set checkpoints and navigate
     if (isCustomGoal && customGoal) {
       console.log("Custom goal set:", customGoal); // Replace with goal processing logic
+    } else {
+      setCheckpointsInCookies(username);
     }
-  
+
     // Reset error if a journey is selected
     setError("");
     navigate(`/home?username=${username}`);
@@ -33,10 +47,13 @@ export const JourneyPage = () => {
 
   const handleInputKeyPress = (event) => {
     if (event.key === "Enter") {
-      // Process the custom goal or navigate
+      // Process the custom goal or set checkpoints and navigate
       if (isCustomGoal && customGoal) {
         console.log("Custom goal set:", customGoal); // Replace with goal processing logic
+      } else {
+        setCheckpointsInCookies(username);
       }
+
       navigate(`/home?username=${username}`);
     }
   };
@@ -50,6 +67,12 @@ export const JourneyPage = () => {
 
   const handleCustomGoalChange = (event) => {
     setCustomGoal(event.target.value);
+  };
+
+  const setCheckpointsInCookies = (username) => {
+    Cookies.set(`checkpoints_${username}`, JSON.stringify(allCheckpoints));
+    console.log(JSON.parse(Cookies.get(`checkpoints_${username}`)));
+    console.log(Cookies.get(`user_${username}`));
   };
 
   return (

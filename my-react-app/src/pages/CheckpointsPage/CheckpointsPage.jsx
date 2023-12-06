@@ -1,88 +1,114 @@
 // CheckpointsPage.jsx
-import React, { useState, useEffect } from 'react';
+import React, { useState , useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../../components/Header/Header';
 import CheckpointComponent from '../../components/CheckpointComponent/CheckpointComponent';
 import './CheckpointsPage.css';
-
-const college_checkpoints = [
-  "Create a resume",
-  "Fill out FAFSA",
-  "Prepare for standardized tests",
-  "Research colleges",
-  "Request letters of recommendation",
-  "Write college essays",
-  "Submit college applications",
-  "Apply for scholarships",
-  "Plan college visits",
-  "Finalize college decision"
-];
+import Cookies from 'js-cookie';
 
 function CheckpointsPage() {
-  const [completedCheckpoints, setCompletedCheckpoints] = useState([]);
-  const [checkpoints, setCheckpoints] = useState([]);
+  const queryParams = new URLSearchParams(window.location.search);
+  const username = queryParams.get('username');
+  const data = Cookies.get(`user_${username}`) || '{}';
+  const userCheckpoints = Cookies.get(`checkpoints_${username}`) || '[]';
 
-  useEffect(() => {
-    const initializeLocalStorage = () => {
-      const storedCheckpoints = localStorage.getItem('checkpoints');
-      if (!storedCheckpoints) {
-        localStorage.setItem('checkpoints', JSON.stringify(college_checkpoints));
-        setCheckpoints(college_checkpoints);
-      } else {
-        setCheckpoints(JSON.parse(storedCheckpoints));
-      }
+  // Initialize state using data from cookies
+  const [completedCheckpoints, setCompletedCheckpoints] = useState(
+    JSON.parse(data).completedCheckpoints || []
+  );
+  const [checkpoints, setCheckpoints] = useState(JSON.parse(userCheckpoints) || []);
 
-      const storedCompletedCheckpoints = localStorage.getItem('completedCheckpoints') || '[]';
-      setCompletedCheckpoints(JSON.parse(storedCompletedCheckpoints));
-    };
-
-    initializeLocalStorage();
-  }, []);
+  useEffect(
+    () => {
+      console.log(checkpoints);
+    }, [checkpoints]
+  );
 
   const handleCheckpointClick = (clickedCheckpoint) => {
-    const isCompleted = completedCheckpoints.includes(clickedCheckpoint);
-    const confirmationMessage = isCompleted
-      ? `You are marking this checkpoint as incomplete: ${clickedCheckpoint}. Confirm?`
-      : `You are completing this checkpoint: ${clickedCheckpoint}. Confirm?`;
-  
-    const isConfirmed = window.confirm(confirmationMessage);
-    
-    if (!isConfirmed) {
-      return;
-    }
-  
     try {
+      const isCompleted = completedCheckpoints.includes(clickedCheckpoint);
+      const confirmationMessage = isCompleted
+        ? `You are marking this checkpoint as incomplete: ${clickedCheckpoint}. Confirm?`
+        : `You are completing this checkpoint: ${clickedCheckpoint}. Confirm?`;
+
+      const isConfirmed = window.confirm(confirmationMessage);
+
+      if (!isConfirmed) {
+        return;
+      }
+
       let updatedCompletedCheckpoints;
       if (isCompleted) {
         // Undo completion
-        updatedCompletedCheckpoints = completedCheckpoints.filter(cp => cp !== clickedCheckpoint);
+        updatedCompletedCheckpoints = completedCheckpoints.filter((cp) => cp !== clickedCheckpoint);
       } else {
         // Complete checkpoint
         updatedCompletedCheckpoints = [...completedCheckpoints, clickedCheckpoint];
       }
-  
+
       setCompletedCheckpoints(updatedCompletedCheckpoints);
-  
-      const progressPercentage = (updatedCompletedCheckpoints.length / college_checkpoints.length) * 100;
-  
-      localStorage.setItem('completedCheckpoints', JSON.stringify(updatedCompletedCheckpoints));
-      localStorage.setItem('progress', progressPercentage);
+
+      const updatedCheckpoints = checkpoints.map((cp) =>
+        cp === clickedCheckpoint ? clickedCheckpoint : cp
+      );
+      setCheckpoints(updatedCheckpoints);
+
+      const progressPercentage =
+        (updatedCompletedCheckpoints.length / updatedCheckpoints.length) * 100;
+
+      const userData = Cookies.get(`user_${username}`);
+      const parsedUserData = userData ? JSON.parse(userData) : {};
+
+      parsedUserData.checkpoints = updatedCheckpoints;
+      parsedUserData.completedCheckpoints = updatedCompletedCheckpoints;
+      parsedUserData.progress = progressPercentage;
+
+      Cookies.set(`user_${username}`, JSON.stringify(parsedUserData));
     } catch (error) {
       console.error('Error updating completion status of checkpoint:', error);
     }
   };
   
-   
+
+  const handleCheckpointEdit = (editedCheckpoint, originalCheckpoint) => {
+    try {
+      const updatedCheckpoints = checkpoints.map((cp) =>
+        cp === originalCheckpoint ? editedCheckpoint : cp
+      );
+
+      setCheckpoints(updatedCheckpoints);
+      // Note: Do not update progress for editing
+
+      console.log('Updated User Data:', updatedCheckpoints);
+      Cookies.set(`checkpoints_${username}`, JSON.stringify(updatedCheckpoints));
+      console.log(Cookies.get(`checkpoints_${username}`) || '[]');
+    } catch (error) {
+      console.error('Error updating edited checkpoint:', error);
+    }
+  };
 
   const handleCheckpointDelete = (deletedCheckpoint) => {
     const isConfirmed = window.confirm(`Are you sure you want to delete "${deletedCheckpoint}"?`);
-    
     if (isConfirmed) {
       try {
         const updatedCheckpoints = checkpoints.filter(cp => cp !== deletedCheckpoint);
         setCheckpoints(updatedCheckpoints);
 
-        localStorage.setItem('checkpoints', JSON.stringify(updatedCheckpoints));
+        Cookies.set(`checkpoints_${username}`, JSON.stringify(updatedCheckpoints));
+        
+        let data = Cookies.get(`user_${username}`) || '{}';
+        data = JSON.parse(data);  // Parse the string into an object
+        const completedCheckpoints = data.completedCheckpoints || [];
+  
+        const progressPercentage =
+          (completedCheckpoints.length / updatedCheckpoints.length) * 100;
+  
+        data.progress = progressPercentage;  // Now `data` is an object, and you can set properties on it
+        console.log(data.progress);
+        console.log(progressPercentage);
+        Cookies.set(`user_${username}`, JSON.stringify(data));
+
+        window.location.reload();
       } catch (error) {
         console.error('Error deleting checkpoint:', error);
       }
@@ -95,15 +121,24 @@ function CheckpointsPage() {
         key={index}
         checkpoint={checkpoint}
         onCheckClick={handleCheckpointClick}
+        onCheckEdit={handleCheckpointEdit}
         onCheckDelete={handleCheckpointDelete}
         completed={completedCheckpoints.includes(checkpoint)}
       />
     ));
   };
 
+  // if (loading) {
+  //   return <div>Loading...</div>;
+  // }
+
+  // if (error) {
+  //   return <div>Error: {error}</div>;
+  // }
+
   return (
     <div className="checkpoints-page-1">
-      <Header username={'SampleUser'} />
+      <Header username={username} />
       <div className="content-container">
         <div className="page-checkpoints-list">
           <div className="checkpoints-title">
@@ -111,7 +146,7 @@ function CheckpointsPage() {
           </div>
           <div className="page-checkpoint-container">{renderCheckpoints()}</div>
         </div>
-        <Link to={`/add_checkpoint?username=SampleUser`} className="add-checkpoint-button">
+        <Link to={`/add_checkpoint?username=${username}`} className="add-checkpoint-button">
           Add Checkpoints
         </Link>
       </div>
