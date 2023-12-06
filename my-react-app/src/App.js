@@ -53,12 +53,12 @@ function App() {
         completedCheckpoints: [],
       },
       bob_smith: {
-        firstName: 'bob_smith',
+        username: 'bob_smith',
         password: "password123",
         progress : "20%",
         checkpointsCompleted: 5,
         applicationsCompleted: 5,
-        targetUniversities: ["University A", "University B", "University C"]
+        targetUniversities: ["UT Dallas", "Stanford", "Colin College"]
     },
     };
 

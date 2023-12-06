@@ -9,7 +9,8 @@ const ViewUserProfile = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const username = new URLSearchParams(window.location.search).get('username');
-  const data = Cookies.get(`user_${username}`);
+  const friendname = new URLSearchParams(window.location.search).get('friendname');
+  const data = Cookies.get(`user_${friendname}`);
   useEffect(() => {
     const fetchUserData = async () => {
       try {

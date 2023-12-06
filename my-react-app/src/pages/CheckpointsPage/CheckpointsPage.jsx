@@ -4,43 +4,40 @@ import { Link } from 'react-router-dom';
 import Header from '../../components/Header/Header';
 import CheckpointComponent from '../../components/CheckpointComponent/CheckpointComponent';
 import './CheckpointsPage.css';
-
-const college_checkpoints = [
-  "Create a resume",
-  "Fill out FAFSA",
-  "Prepare for standardized tests",
-  "Research colleges",
-  "Request letters of recommendation",
-  "Write college essays",
-  "Submit college applications",
-  "Apply for scholarships",
-  "Plan college visits",
-  "Finalize college decision"
-];
+import Cookies from 'js-cookie';
 
 function CheckpointsPage() {
   const [completedCheckpoints, setCompletedCheckpoints] = useState([]);
   const [checkpoints, setCheckpoints] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const queryParams = new URLSearchParams(window.location.search);
   const username = queryParams.get('username');
-  
+
   useEffect(() => {
-    const initializeLocalStorage = () => {
-      const storedCheckpoints = localStorage.getItem('checkpoints');
-      if (!storedCheckpoints) {
-        localStorage.setItem('checkpoints', JSON.stringify(college_checkpoints));
-        setCheckpoints(college_checkpoints);
-      } else {
-        setCheckpoints(JSON.parse(storedCheckpoints));
+    // Fetch friends list and user checkpoints from localStorage when the component mounts
+    const data = Cookies.get(`user_${username}`) || '{}';
+    const userCheckpoints = Cookies.get(`checkpoints_${username}`) || '[]';
+    const fetchUserData = async () => {
+      try {
+        if (!username) {
+          throw new Error('Username not provided in search params');
+        }
+        
+        console.log(data);
+        console.log(userCheckpoints);
+        setCompletedCheckpoints(data.completedCheckpoints || []);
+        setCheckpoints(JSON.parse(userCheckpoints) || []);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
       }
-
-      const storedCompletedCheckpoints = localStorage.getItem('completedCheckpoints') || '[]';
-      setCompletedCheckpoints(JSON.parse(storedCompletedCheckpoints));
     };
-
-    initializeLocalStorage();
-  }, []);
+  
+    fetchUserData();
+  }, [username]);
 
   const handleCheckpointClick = (clickedCheckpoint) => {
     const isCompleted = completedCheckpoints.includes(clickedCheckpoint);
@@ -66,10 +63,22 @@ function CheckpointsPage() {
   
       setCompletedCheckpoints(updatedCompletedCheckpoints);
   
-      const progressPercentage = (updatedCompletedCheckpoints.length / college_checkpoints.length) * 100;
-  
-      localStorage.setItem('completedCheckpoints', JSON.stringify(updatedCompletedCheckpoints));
-      localStorage.setItem('progress', progressPercentage);
+      const progressPercentage = (updatedCompletedCheckpoints.length / checkpoints.length) * 100;
+      console.log(updatedCompletedCheckpoints);
+      
+      const userData = Cookies.get(`userData_${username}`);
+
+      // Parse the existing user data
+      const parsedUserData = userData ? JSON.parse(userData) : {};
+
+      // Update the specific fields (completedCheckpoints and progress)
+      parsedUserData.completedCheckpoints = updatedCompletedCheckpoints;
+      parsedUserData.progress = progressPercentage;
+
+      console.log('parsed user data');
+      console.log(parsedUserData);
+      // Set the updated user data back to the cookie
+      Cookies.set(`userData_${username}`, JSON.stringify(parsedUserData));
     } catch (error) {
       console.error('Error updating completion status of checkpoint:', error);
     }
@@ -103,6 +112,14 @@ function CheckpointsPage() {
       />
     ));
   };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   return (
     <div className="checkpoints-page-1">

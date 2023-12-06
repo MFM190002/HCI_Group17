@@ -18,7 +18,7 @@ function FriendsPage() {
 
   const renderFriendsList = () => {
     return friends.map((friend, index) => (
-      <FriendComponent key={index} friend={friend} />
+      <FriendComponent key={index} friend={friend} username={username}/>
     ));
   };
 

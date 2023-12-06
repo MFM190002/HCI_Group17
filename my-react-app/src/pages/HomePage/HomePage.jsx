@@ -11,43 +11,38 @@ function HomePage() {
   const [completedCheckpoints, setCompletedCheckpoints] = useState([]);
   const [friends, setFriends] = useState([]);
   const [allCheckpoints, setAllCheckpoints] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const queryParams = new URLSearchParams(window.location.search);
   const username = queryParams.get('username');
 
+  const data = Cookies.get(`user_${username}`) || '{}';
+  const userCheckpoints = Cookies.get(`checkpoints_${username}`) || '[]';
   useEffect(() => {
     // Fetch friends list and user checkpoints from localStorage when the component mounts
     const storedFriends = Cookies.get(`friends_${username}`) || '[]';
     setFriends(JSON.parse(storedFriends));
 
-    const storedCompletedCheckpoints = localStorage.getItem('completedCheckpoints');
-    if (storedCompletedCheckpoints) {
-      setCompletedCheckpoints(JSON.parse(storedCompletedCheckpoints));
-    }
-
-    // Initialize the list of all checkpoints with the sample college checkpoints
-    const sampleCollegeCheckpoints = [
-      "Create a resume",
-      "Fill out FAFSA",
-      "Prepare for standardized tests",
-      "Research colleges",
-      "Request letters of recommendation",
-      "Write college essays",
-      "Submit college applications",
-      "Apply for scholarships",
-      "Plan college visits",
-      "Finalize college decision"
-    ];
-
-    setAllCheckpoints(sampleCollegeCheckpoints);
-
-    // Check if there are additional checkpoints in localStorage
-    const storedUserCheckpoints = localStorage.getItem('userCheckpoints');
-    if (storedUserCheckpoints) {
-      const userCheckpointsFromStorage = JSON.parse(storedUserCheckpoints);
-      setAllCheckpoints((prevCheckpoints) => [...prevCheckpoints, ...userCheckpointsFromStorage]);
-    }
-  }, [username]);
+    const fetchUserData = async () => {
+      try {
+        if (!username) {
+          throw new Error('Username not provided in search params');
+        }
+        
+        console.log(data);
+        console.log(userCheckpoints);
+        setCompletedCheckpoints(data.completedCheckpoints || []);
+        setAllCheckpoints(JSON.parse(userCheckpoints) || []);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+  
+    fetchUserData();
+  }, [username, data, userCheckpoints]);
 
   const handleCheckpointClick = (clickedCheckpoint) => {
     // Display confirmation pop-up
@@ -66,14 +61,22 @@ function HomePage() {
     // Calculate progress percentage
     const progressPercentage = (updatedCompletedCheckpoints.length / allCheckpoints.length) * 100;
 
-    // Set progress and completed checkpoints to localStorage
-    localStorage.setItem('completedCheckpoints', JSON.stringify(updatedCompletedCheckpoints));
-    localStorage.setItem('progress', progressPercentage);
+    const userData = Cookies.get(`userData_${username}`);
+
+    // Parse the existing user data
+    const parsedUserData = userData ? JSON.parse(userData) : {};
+
+    // Update the specific fields (completedCheckpoints and progress)
+    parsedUserData.completedCheckpoints = updatedCompletedCheckpoints;
+    parsedUserData.progress = progressPercentage;
+    console.log(parsedUserData);
+    // Set the updated user data back to the cookie
+    Cookies.set(`userData_${username}`, JSON.stringify(parsedUserData));
   };
 
   const renderFriendsList = () => {
     return friends.slice(0, 3).map((friend, index) => (
-      <FriendComponent key={index} friend={friend} />
+      <FriendComponent key={index} friend={friend} username={username} />
     ));
   };
 
@@ -90,6 +93,13 @@ function HomePage() {
     ));
   };
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
   return (
     <div className="friends-container">
       <div className="content">
