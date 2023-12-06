@@ -17,27 +17,40 @@ function App() {
     // Updated dummy user data with friends and checkpoints
     const dummyUsers = {
       john_doe: {
+        firstName: 'John',
         password: 'secret123',
         progress: '20',
         friends: [
-          { name: 'Jim', progress: '20%' },
-          { name: 'Bob', progress: '10%' },
+          { username:'jimmy', name: 'Jim', progress: '20%' },
+          { username:'bobdun', name: 'Bob', progress: '10%' },
         ],
         checkpoints: ['Draft College Essay', 'Fill out FAFSA', 'Start UTD App'],
         completedCheckpoints: [],
       },
       alice_smith: {
+        firstName: 'Alice',
         password: 'password123',
         progress: '30',
         friends: [
-          { name: 'Jim', progress: '20%' },
-          { name: 'Bob', progress: '10%' },
-          { name: 'Sanjay', progress: '15%' },
+          { username:'jimmy', name: 'Jim', progress: '20%' },
+          { username:'bobdun', name: 'Bob', progress: '10%' },
+          { username: 'sanjaysharm', name: 'Sanjay', progress: '15%' },
         ],
         checkpoints: ['Draft College Essay', 'Fill out FAFSA', 'Start UTD App'],
         completedCheckpoints: [],
       },
       // Add more dummy users as needed
+      harry_cooper: {
+        firstName: 'Harry',
+        password: 'bunnies43',
+        progress: '50',
+        friends: [
+          { username:'jimmy', name: 'Jim', progress: '20%' },
+          { username:'bobdun', name: 'Bob', progress: '10%' },
+        ],
+        checkpoints: ['Draft College Essay', 'Fill out FAFSA', 'Start UTD App'],
+        completedCheckpoints: [],
+      },
     };
 
     // Set cookies for each dummy user
