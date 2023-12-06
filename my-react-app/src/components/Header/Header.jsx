@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import './Header.css';
 
 const Header = ({ username }) => {
-  const [dropdownOpen, setDropdownOpen] = useState(true);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const handleDropdownToggle = (event) => {
     setDropdownOpen(!dropdownOpen);

@@ -14,17 +14,15 @@ function HomePage() {
 
   const queryParams = new URLSearchParams(window.location.search);
   const username = queryParams.get('username');
-  const userData = JSON.parse(Cookies.get(`user_${username}`));
 
   useEffect(() => {
     // Fetch friends list and user checkpoints from localStorage when the component mounts
     const storedFriends = Cookies.get(`friends_${username}`) || '[]';
     setFriends(JSON.parse(storedFriends));
 
-    const userData = JSON.parse(Cookies.get(`user_${username}`));
-    const storedCompletedCheckpoints = userData.completedCheckpoints || [];
-    if (storedCompletedCheckpoints && storedCompletedCheckpoints.length > 0) {
-      setCompletedCheckpoints(storedCompletedCheckpoints);
+    const storedCompletedCheckpoints = localStorage.getItem('completedCheckpoints');
+    if (storedCompletedCheckpoints) {
+      setCompletedCheckpoints(JSON.parse(storedCompletedCheckpoints));
     }
 
     // Initialize the list of all checkpoints with the sample college checkpoints
@@ -44,14 +42,13 @@ function HomePage() {
     setAllCheckpoints(sampleCollegeCheckpoints);
 
     // Check if there are additional checkpoints in localStorage
-    const storedUserCheckpoints = Cookies.get(`checkpoints_${username}`);
+    const storedUserCheckpoints = localStorage.getItem('userCheckpoints');
     if (storedUserCheckpoints) {
       const userCheckpointsFromStorage = JSON.parse(storedUserCheckpoints);
       setAllCheckpoints((prevCheckpoints) => [...prevCheckpoints, ...userCheckpointsFromStorage]);
     }
   }, [username]);
 
-  Cookies.set(`checkpoints_${username}`, JSON.stringify(allCheckpoints));
   const handleCheckpointClick = (clickedCheckpoint) => {
     // Display confirmation pop-up
     const isConfirmed = window.confirm(`You are completing this checkpoint:
@@ -70,9 +67,8 @@ function HomePage() {
     const progressPercentage = (updatedCompletedCheckpoints.length / allCheckpoints.length) * 100;
 
     // Set progress and completed checkpoints to localStorage
-    console.log(allCheckpoints)
-    Cookies.set(userData.completedCheckpoints, JSON.stringify(updatedCompletedCheckpoints));
-    Cookies.set(userData.progress, progressPercentage.toString());
+    localStorage.setItem('completedCheckpoints', JSON.stringify(updatedCompletedCheckpoints));
+    localStorage.setItem('progress', progressPercentage);
   };
 
   const renderFriendsList = () => {

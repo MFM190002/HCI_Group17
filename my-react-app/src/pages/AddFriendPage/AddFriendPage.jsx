@@ -21,7 +21,7 @@ function AddFriendPage() {
       if (storedUser) {
         const friendData = JSON.parse(storedUser);
         setFriendExists(true);
-        setUserDetails({ name: friendData.firstName, progress: friendData.progress });
+        setUserDetails({ name: friendData.username, progress: friendData.progress });
       } else {
         throw new Error("Friend not found");
       }

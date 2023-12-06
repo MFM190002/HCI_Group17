@@ -52,6 +52,14 @@ function App() {
         checkpoints: ['Draft College Essay', 'Fill out FAFSA', 'Start UTD App'],
         completedCheckpoints: [],
       },
+      bob_smith: {
+        firstName: 'bob_smith',
+        password: "password123",
+        progress : "20%",
+        checkpointsCompleted: 5,
+        applicationsCompleted: 5,
+        targetUniversities: ["University A", "University B", "University C"]
+    },
     };
 
     // Set cookies for each dummy user

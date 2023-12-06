@@ -11,7 +11,9 @@ export const JourneyPage = () => {
   const [selectedGoal, setSelectedGoal] = useState("");
   const [customGoal, setCustomGoal] = useState("");
   const [error, setError] = useState("");
-  const [allCheckpoints, setAllCheckpoints] = useState([
+  const queryParams = new URLSearchParams(window.location.search);
+  const username = queryParams.get('username');
+  const allCheckpoints = [
     "Create a resume",
     "Fill out FAFSA",
     "Prepare for standardized tests",
@@ -22,10 +24,7 @@ export const JourneyPage = () => {
     "Apply for scholarships",
     "Plan college visits",
     "Finalize college decision"
-  ]);
-  const queryParams = new URLSearchParams(window.location.search);
-  const username = queryParams.get('username');
-  
+  ];
 
   const handleButtonClick = (event) => {
     event.preventDefault();

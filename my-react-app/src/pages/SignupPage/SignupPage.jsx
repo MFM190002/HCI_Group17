@@ -34,12 +34,14 @@ function SignupPage() {
       try {
         // Update to use cookies for signup
         const userData = {
-          firstName,
+          username,
           password,
           progress: 0,
           friends: [],
           checkpoints: [],
           completedCheckpoints: [],
+          applicationsCompleted: 0,
+          targetUniversities: []
         };
 
         Cookies.set(`user_${username}`, JSON.stringify(userData));

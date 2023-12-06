@@ -4,37 +4,54 @@ import Header from '../../components/Header/Header';
 import Cookies from 'js-cookie';
 
 const Profile = () => {
-const username = new URLSearchParams(window.location.search).get('username');
-  const [profileData, setProfileData] = useState({
-    applicationsCompleted: 0,
-    targetUniversities: [],
-  });
+  const [profileData, setProfileData] = useState({});
+  const [loading, setLoading] = useState(true);
+  const username = new URLSearchParams(window.location.search).get('username');
+  const data = Cookies.get(`user_${username}`);
   const [editingUniversityIndex, setEditingUniversityIndex] = useState(null);
   const [newUniversity, setNewUniversity] = useState('');
 
   useEffect(() => {
-    const fetchProfileData = () => {
-      const storedProfileData = Cookies.get(`profile_${username}`);
-      if (storedProfileData) {
-        setProfileData(JSON.parse(storedProfileData));
+    const fetchUserData = async () => {
+      try {
+        if (!username) {
+          throw new Error('Username not provided in search params');
+        }
+        
+        console.log(data);
+        setProfileData(data ? JSON.parse(data) : data); // Initialize with an empty object if data is null
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
       }
     };
 
-    fetchProfileData();
+    fetchUserData();
+  // eslint-disable-next-line
   }, [username]);
+  
 
   const handleIncrementApplications = () => {
     setProfileData((prevData) => ({
       ...prevData,
-      applicationsCompleted: prevData.applicationsCompleted + 1,
+      applicationsCompleted: (prevData.applicationsCompleted || 0) + 1,
     }));
   };
+
+  useEffect(() => {
+    const saveProfileToCookie = () => {
+      Cookies.set(`user_${username}`, JSON.stringify(profileData));
+    };
+
+    saveProfileToCookie();
+  }, [profileData, username]);
 
   const handleAddUniversity = () => {
     if (newUniversity.trim() !== '') {
       setProfileData((prevData) => ({
         ...prevData,
-        targetUniversities: [...prevData.targetUniversities, newUniversity],
+        targetUniversities: [...(prevData.targetUniversities || []), newUniversity],
       }));
       setNewUniversity('');
     }
@@ -47,7 +64,7 @@ const username = new URLSearchParams(window.location.search).get('username');
 
   const handleSaveUniversityEdit = () => {
     setProfileData((prevData) => {
-      const updatedUniversities = [...prevData.targetUniversities];
+      const updatedUniversities = [...(prevData.targetUniversities || [])];
       updatedUniversities[editingUniversityIndex] = newUniversity;
       return {
         ...prevData,
@@ -61,64 +78,58 @@ const username = new URLSearchParams(window.location.search).get('username');
   const handleDeleteUniversity = (index) => {
     setProfileData((prevData) => ({
       ...prevData,
-      targetUniversities: prevData.targetUniversities.filter((_, i) => i !== index),
+      targetUniversities: (prevData.targetUniversities || []).filter((_, i) => i !== index),
     }));
   };
 
-  const saveProfileToCookie = () => {
-    Cookies.set(`profile_${username}`, JSON.stringify(profileData));
-  };
-
-  useEffect(() => {
-    saveProfileToCookie();
-  }, [profileData, username]);
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="edit-user-page">
-      <Header/>
-      <div className="edit-user-title">
-        {username}
-      </div>
+      <Header username={username} />
+      <div className="edit-user-title">{username}</div>
       <div className="edit-user-stats">
         <div>
-            <p>Applications Completed: {profileData.applicationsCompleted}</p>
-            <button onClick={handleIncrementApplications}>Increment Applications</button>
+          <p>Applications Completed: {profileData.applicationsCompleted || 0}</p>
+          <button onClick={handleIncrementApplications}>Increment Applications</button>
         </div>
         <div>
-            <h2>Target Universities</h2>
-            <ul>
-            {profileData.targetUniversities.map((university, index) => (
-                <li key={index}>
+          <h2>Target Universities</h2>
+          <ul>
+            {(profileData.targetUniversities || []).map((university, index) => (
+              <li key={index}>
                 {index === editingUniversityIndex ? (
-                    <>
+                  <>
                     <input
-                        type="text"
-                        value={newUniversity}
-                        onChange={(e) => setNewUniversity(e.target.value)}
+                      type="text"
+                      value={newUniversity}
+                      onChange={(e) => setNewUniversity(e.target.value)}
                     />
                     <button onClick={handleSaveUniversityEdit}>Save</button>
-                    </>
+                  </>
                 ) : (
-                    <>
+                  <>
                     {university}
                     <button onClick={() => handleEditUniversity(index)}>Edit</button>
                     <button onClick={() => handleDeleteUniversity(index)}>Delete</button>
-                    </>
+                  </>
                 )}
-                </li>
+              </li>
             ))}
-            </ul>
-            <div>
+          </ul>
+          <div>
             <input
-                type="text"
-                placeholder="Add new university"
-                value={newUniversity}
-                onChange={(e) => setNewUniversity(e.target.value)}
+              type="text"
+              placeholder="Add new university"
+              value={newUniversity}
+              onChange={(e) => setNewUniversity(e.target.value)}
             />
             <button onClick={handleAddUniversity}>Add University</button>
-            </div>
+          </div>
         </div>
-        </div>
+      </div>
     </div>
   );
 };
