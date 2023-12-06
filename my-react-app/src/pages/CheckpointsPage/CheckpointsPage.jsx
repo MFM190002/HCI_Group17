@@ -1,5 +1,5 @@
 // CheckpointsPage.jsx
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../../components/Header/Header';
 import CheckpointComponent from '../../components/CheckpointComponent/CheckpointComponent';
@@ -7,94 +7,97 @@ import './CheckpointsPage.css';
 import Cookies from 'js-cookie';
 
 function CheckpointsPage() {
-  const [completedCheckpoints, setCompletedCheckpoints] = useState([]);
-  const [checkpoints, setCheckpoints] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
   const queryParams = new URLSearchParams(window.location.search);
   const username = queryParams.get('username');
+  const data = Cookies.get(`user_${username}`) || '{}';
+  const userCheckpoints = Cookies.get(`checkpoints_${username}`) || '[]';
 
-  useEffect(() => {
-    // Fetch friends list and user checkpoints from localStorage when the component mounts
-    const data = Cookies.get(`user_${username}`) || '{}';
-    const userCheckpoints = Cookies.get(`checkpoints_${username}`) || '[]';
-    const fetchUserData = async () => {
-      try {
-        if (!username) {
-          throw new Error('Username not provided in search params');
-        }
-        
-        console.log(data);
-        console.log(userCheckpoints);
-        setCompletedCheckpoints(data.completedCheckpoints || []);
-        setCheckpoints(JSON.parse(userCheckpoints) || []);
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-  
-    fetchUserData();
-  }, [username]);
+  // Initialize state using data from cookies
+  const [completedCheckpoints, setCompletedCheckpoints] = useState(
+    JSON.parse(data).completedCheckpoints || []
+  );
+  const [checkpoints, setCheckpoints] = useState(JSON.parse(userCheckpoints) || []);
+
 
   const handleCheckpointClick = (clickedCheckpoint) => {
-    const isCompleted = completedCheckpoints.includes(clickedCheckpoint);
-    const confirmationMessage = isCompleted
-      ? `You are marking this checkpoint as incomplete: ${clickedCheckpoint}. Confirm?`
-      : `You are completing this checkpoint: ${clickedCheckpoint}. Confirm?`;
-  
-    const isConfirmed = window.confirm(confirmationMessage);
-    
-    if (!isConfirmed) {
-      return;
-    }
-  
     try {
+      const isCompleted = completedCheckpoints.includes(clickedCheckpoint);
+      const confirmationMessage = isCompleted
+        ? `You are marking this checkpoint as incomplete: ${clickedCheckpoint}. Confirm?`
+        : `You are completing this checkpoint: ${clickedCheckpoint}. Confirm?`;
+
+      const isConfirmed = window.confirm(confirmationMessage);
+
+      if (!isConfirmed) {
+        return;
+      }
+
       let updatedCompletedCheckpoints;
       if (isCompleted) {
         // Undo completion
-        updatedCompletedCheckpoints = completedCheckpoints.filter(cp => cp !== clickedCheckpoint);
+        updatedCompletedCheckpoints = completedCheckpoints.filter((cp) => cp !== clickedCheckpoint);
       } else {
         // Complete checkpoint
         updatedCompletedCheckpoints = [...completedCheckpoints, clickedCheckpoint];
       }
-  
-      setCompletedCheckpoints(updatedCompletedCheckpoints);
-  
-      const progressPercentage = (updatedCompletedCheckpoints.length / checkpoints.length) * 100;
-      console.log(updatedCompletedCheckpoints);
-      
-      const userData = Cookies.get(`userData_${username}`);
 
-      // Parse the existing user data
+      setCompletedCheckpoints(updatedCompletedCheckpoints);
+
+      const updatedCheckpoints = checkpoints.map((cp) =>
+        cp === clickedCheckpoint ? clickedCheckpoint : cp
+      );
+      setCheckpoints(updatedCheckpoints);
+
+      const progressPercentage =
+        (updatedCompletedCheckpoints.length / updatedCheckpoints.length) * 100;
+
+      const userData = Cookies.get(`user_${username}`);
       const parsedUserData = userData ? JSON.parse(userData) : {};
 
-      // Update the specific fields (completedCheckpoints and progress)
+      parsedUserData.checkpoints = updatedCheckpoints;
       parsedUserData.completedCheckpoints = updatedCompletedCheckpoints;
       parsedUserData.progress = progressPercentage;
 
-      console.log('parsed user data');
-      console.log(parsedUserData);
-      // Set the updated user data back to the cookie
-      Cookies.set(`userData_${username}`, JSON.stringify(parsedUserData));
+      Cookies.set(`user_${username}`, JSON.stringify(parsedUserData));
     } catch (error) {
       console.error('Error updating completion status of checkpoint:', error);
     }
   };
   
-   
+
+  const handleCheckpointEdit = (editedCheckpoint, originalCheckpoint) => {
+    try {
+      const updatedCheckpoints = checkpoints.map((cp) =>
+        cp === originalCheckpoint ? editedCheckpoint : cp
+      );
+
+      setCheckpoints(updatedCheckpoints);
+
+      const userData = Cookies.get(`user_${username}`);
+      const parsedUserData = userData ? JSON.parse(userData) : {};
+
+      parsedUserData.checkpoints = updatedCheckpoints;
+      parsedUserData.completedCheckpoints = completedCheckpoints;
+      // Note: Do not update progress for editing
+
+      console.log('Updated User Data:', parsedUserData);
+      Cookies.set(`user_${username}`, JSON.stringify(parsedUserData));
+    } catch (error) {
+      console.error('Error updating edited checkpoint:', error);
+    }
+  };
 
   const handleCheckpointDelete = (deletedCheckpoint) => {
     const isConfirmed = window.confirm(`Are you sure you want to delete "${deletedCheckpoint}"?`);
-    
     if (isConfirmed) {
       try {
         const updatedCheckpoints = checkpoints.filter(cp => cp !== deletedCheckpoint);
         setCheckpoints(updatedCheckpoints);
 
-        localStorage.setItem('checkpoints', JSON.stringify(updatedCheckpoints));
+        const userData = Cookies.get(`user_${username}`);
+        const parsedUserData = userData ? JSON.parse(userData) : {};
+        parsedUserData.checkpoints = updatedCheckpoints;
+        Cookies.set(`user_${username}`, JSON.stringify(parsedUserData));
       } catch (error) {
         console.error('Error deleting checkpoint:', error);
       }
@@ -107,19 +110,20 @@ function CheckpointsPage() {
         key={index}
         checkpoint={checkpoint}
         onCheckClick={handleCheckpointClick}
+        onCheckEdit={handleCheckpointEdit}
         onCheckDelete={handleCheckpointDelete}
         completed={completedCheckpoints.includes(checkpoint)}
       />
     ));
   };
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  // if (loading) {
+  //   return <div>Loading...</div>;
+  // }
 
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
+  // if (error) {
+  //   return <div>Error: {error}</div>;
+  // }
 
   return (
     <div className="checkpoints-page-1">

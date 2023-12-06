@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import './CheckpointComponent.css';
 
-const CheckpointComponent = ({ checkpoint, onCheckClick, onCheckDelete, completed }) => {
+const CheckpointComponent = ({ checkpoint, onCheckClick, onCheckEdit, onCheckDelete, completed }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [editing, setEditing] = useState(false);
   const [editedCheckpoint, setEditedCheckpoint] = useState(checkpoint);
@@ -27,6 +27,7 @@ const CheckpointComponent = ({ checkpoint, onCheckClick, onCheckDelete, complete
     // Add your logic for handling the edited name confirmation
     // For example, you might want to update the checkpoint name in the state or trigger an API call
     console.log('Edited checkpoint:', editedCheckpoint);
+    onCheckEdit(editedCheckpoint, checkpoint);
     setEditing(false); // Exit editing mode
     setDropdownOpen(false);
   };
